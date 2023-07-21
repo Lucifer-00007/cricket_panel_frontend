@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <title>API Dashboard</title>
+    {{>headlinks}}
+</head>
+
+<body>
+    {{>sidebar}}
+    <section class="home-section">
+        {{>dashboardNav}}
+
+        <div class="home-content">
+            <div class="overview-boxes">
+                <div class="box">
+                    <i class='bx bxs-cricket-ball cart'></i>
+                    <div class="right-side">
+                        <div class="box-topic">Cricbuzz</div>
+                        <input id='cricbuzz-input' type="text" class="form-control" placeholder="Key">
+                    </div>
+                </div>
+
+                <div class="box">
+                    <i class='bx bx-cricket-ball cart three'></i>
+                    <div class="right-side">
+                        <div class="box-topic">Espn</div>
+                        <input id='espn-input' type="text" class="form-control" placeholder="Key">
+                    </div>
+                </div>
+
+                <div class="box">
+                    <i class='bx bxs-cricket-ball cart four'></i>
+                    <div class="right-side">
+                        <div class="box-topic">Criclive</div>
+                        <input id='criclive-input' type="text" class="form-control" placeholder="Key">
+                    </div>
+                </div>
+
+                <div class="box">
+                    <i class='bx bx-cricket-ball cart two'></i>
+                    <div class="right-side">
+                        <div class="box-topic">Sportskeeda</div>
+                        <input id='cricexc-input' type="text" class="form-control" placeholder="Key">
+                    </div>
+                </div>
+            </div>
+
+            <div class="overview-boxes">
+                <div class="button-boxx">
+                    <div class="right-side">
+                        <button onclick="combine_api()" type="button" class="btn btn-lg btn-dark">SUBMIT</button>
+                    </div>
+                </div>
+                <div class="button-boxx">
+                    <div class="right-side">
+                        <button type="button" class="btn btn-lg btn-danger">CANCEL</button>
+                    </div>
+                </div>
+            </div>
+
+            {{!-- Score-section --}}
+            {{#each score_details}}
+            <div class="py-2">
+                <div class="sales-boxes">
+                    <div class="recent-sales box">
+                        <div class="title"><a href='${api_url}'>{{@key}}</a></div>
+                        <div class="sales-details">
+                            <table class="table">
+                                <tbody id="">
+                                    <tr class="details">
+                                        <td class="topic">Date</td>
+                                        <td class="topic">Match Key</td>
+                                        <td class="topic">Match</td>
+                                        <td class="topic">Inns 1</td>
+                                        <td class="topic">Inns 2</td>
+                                    </tr>
+                                    {{#each this.this}}
+                                    <tr class="match-details running-match">
+                                        <td>{{this.this.start_date_time}}</td>
+                                        <td class=''>{{@key}}</td>
+                                        <td><a class='{running-match}' target="_blank" href="{{this.this.match_urls}}">{{this.this.t1.n}} vs {{this.this.t2.n}}</a></td>
+                                        <td>{{this.this.i1.sc}}/{{this.this.i1.wk}}({{this.this.i1.ov}})</td>
+                                        <td>{{this.this.i2.sc}}/{{this.this.i2.wk}}({{this.this.i2.ov}})</td>
+                                    </tr>
+                                    {{/each}}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="button">
+                            <a href="#">See All</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{else}}    
+            {{>loader}}
+            
+            {{/each}}
+
+        </div>
+
+        {{>footer}}
+    </section>
+    {{>footerlinks}}
+</body>
+
+</html>

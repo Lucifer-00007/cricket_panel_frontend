@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+   <head>
+      <meta charset="UTF-8">
+      <title>API Dashboard</title>
+      <link rel="stylesheet" href="panel.css">
+      <!-- Loader -->
+      <link rel="stylesheet"href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+      
+      <!-- Boxicons CDN Link -->
+      <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
+      
+      <!-- CSS only -->
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+   <body>
+      <div class="sidebar">
+         <div class="logo-details justify-content-between align-items-center">
+            <div class="">
+               <i class='bx bxl-c-plus-plus'></i>
+            <span class="logo_name">MATCH</span>
+            </div>
+            <span class="d-sm-none"><i onclick="hide_dashboard()" class="fa fa-times"></i></span>
+         </div>
+         <ul class="nav-links">
+            <li>
+               <a href="#" class="active">
+                  <i class='bx bx-grid-alt' ></i>
+                  <span class="links_name">Dashboard</span>
+               </a>
+            </li>
+            <li>
+               <a href="#">
+                  <i class='bx bx-box' ></i>
+                  <span class="links_name">Cricbuzz</span>
+               </a>
+            </li>
+            <li>
+               <a href="#">
+                  <i class='bx bx-list-ul' ></i>
+                  <span class="links_name">Cricexch</span>
+               </a>
+            </li>
+            <li>
+               <a href="#">
+               <i class='bx bx-pie-chart-alt-2' ></i>
+               <span class="links_name">Espn</span>
+               </a>
+            </li>
+            <li>
+               <a href="#">
+               <i class='bx bx-coin-stack' ></i>
+               <span class="links_name">Criclive</span>
+               </a>
+            </li>
+            <li class="log_out">
+               <a href="#">
+               <i id='log-out' class='bx bx-log-out'></i>
+               <span class="links_name">Log out</span>
+               </a>
+            </li>
+         </ul>
+      </div>      
+      
+      <section class="home-section">
+         <nav>
+            <div class="sidebar-button">
+               <i class='bx bx-menu sidebarBtn'></i>
+               <span class="dashboard">Dashboard</span>
+            </div>
+         </nav>
+         
+         <div class="home-content">
+            <div class="overview-boxes">
+               <div class="box">
+                  <i class='bx bxs-cricket-ball cart'></i>
+                  <div class="right-side">
+                     <div class="box-topic">Cricbuzz</div>
+                     <input id='cricbuzz-input' type="text" class="form-control" placeholder="Key">
+                  </div>
+               </div>
+               
+               <div class="box">
+                  <i class='bx bx-cricket-ball cart three' ></i>
+                  <div class="right-side">
+                     <div class="box-topic">Espn</div>
+                     <input id='espn-input' type="text" class="form-control" placeholder="Key">
+                  </div>
+               </div>
+
+               <div class="box">
+                  <i class='bx bxs-cricket-ball cart four'></i>
+                  <div class="right-side">
+                     <div class="box-topic">Criclive</div>
+                     <input id='criclive-input' type="text" class="form-control" placeholder="Key">
+                  </div>
+               </div>
+
+               <div class="box">
+                  <i class='bx bx-cricket-ball cart two' ></i>
+                  <div class="right-side">
+                     <div class="box-topic">Sportskeeda</div>
+                     <input id='cricexc-input' type="text" class="form-control" placeholder="Key">
+                  </div>
+               </div>
+            </div>
+   
+            <div class="overview-boxes">
+               <div class="button-boxx">
+                  <div class="right-side">
+                     <button onclick="combine_api()" type="button" class="btn btn-lg btn-dark">SUBMIT</button>
+                  </div>
+               </div>
+               <div class="button-boxx">
+                  <div class="right-side">
+                     <button type="button" class="btn btn-lg btn-danger">CANCEL</button>
+                  </div>
+               </div>                    
+            </div>
+
+            <span id='home-compo'>
+               <div class="vertical-centered-box" id="vertical-centered-box">
+                  <div class="content">
+                     <div class="loader-circle"></div>
+                     <div class="loader-line-mask">
+                        <div class="loader-line">
+                           <section class="home-section">
+                              <div class="home-content"></div>
+                           </section>
+                        </div>
+                     </div>   
+                     <img src="PGL.png">
+                  </div>
+               </div>               
+            </span>              
+         </div> 
+         <footer class="card p-2 text-center d-block">
+            Copyright © punterguru.com @ 2022
+         </footer>     
+      </section>  
+
+      <script src="myscript.js"></script> 
+      
+      <!-- JavaScript Bundle with Popper -->
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+   </body>
+</html> 
+

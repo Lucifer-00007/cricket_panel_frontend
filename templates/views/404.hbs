@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>404</title>
+    {{>headlinks}}
+</head>
+
+<body>
+    {{>sidebar}}
+
+    <!-- main header -->
+    <section class="home-section">
+        {{>dashboardNav}}
+
+        <div class="container-fluid main_header">
+            <div class="row">
+                <div class="col-md-10 col-12 mx-auto">
+                    <div class="row">
+                        <div class="col-md-12 col-12 main_header_left align-items-center">
+                            <!-- 404 image -->
+                            <figure class="errimg">
+                                <img src="images/404.jpg" alt="luci" class="img-fluid" title="lucifer">
+                            </figure>
+
+                            <!-- error msg -->
+                            <p>{{errMsg}}</p>
+                            <button onclick="window.location.href='/';" class="btn btn-danger">Go Back</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- footer -->
+        {{>footer}}
+    </section>
+    {{>footerlinks}}
+</body>
+
+</html>
