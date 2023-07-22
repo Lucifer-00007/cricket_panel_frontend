@@ -2,7 +2,8 @@ const {ScoreController} = require("./api");
 const express = require('express')
 const path = require('path')
 const hbs = require('hbs')
-var cors = require("cors")
+var cors = require("cors");
+const { KeyObject } = require("crypto");
 
 const app = express()
 const port = process.env.PORT || 3001;
@@ -31,8 +32,14 @@ app.set('views', viewsPath);
 hbs.registerPartials(partialsPath);
 
 // routes
-app.get('/', (req, res) => {
-  res.render('index.hbs', {score_details : ScoreController})
+app.get('/', async(req, res) => {
+  res.set("Connection", "keep-alive")
+  res.set("Cache-Control", "no-cache")
+  res.set("Access-Control-Allow-Origin", "*")
+  
+  if(Object.keys(ScoreController).length > 0){
+    res.render('index.hbs', {score_details : ScoreController})
+  }
 })
 
 app.get('/about', (req, res) => {
