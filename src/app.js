@@ -1,11 +1,11 @@
-const { ScoreController } = require("./api");
+const { ScoreController, all_match_sites } = require("./api");
 const express = require('express')
 const path = require('path')
 const hbs = require('hbs')
 var cors = require("cors");
 
 const app = express()
-const port = process.env.PORT || 3001;
+const port = process.env.PORT || 3002;
 
 
 // public static path
@@ -55,6 +55,12 @@ hbs.handlebars.registerHelper('checkLive', (val) => {
 	}
 })
 
+// checkLive Func
+// hbs.handlebars.registerHelper('getApiUrl', (val) => {
+// 	console.log(all_match_sites[val])
+// 	return all_match_sites[val]
+// })
+
 // formatDateTime Func
 const format_date_time = (unix) => {
 	const local_dt = new Date(unix);
@@ -67,7 +73,7 @@ app.get('/', async (req, res) => {
 	res.set("Cache-Control", "no-cache")
 	res.set("Access-Control-Allow-Origin", "*")
 
-	res.render('index.hbs', { score_details: ScoreController, })
+	res.render('index.hbs', { score_details: ScoreController })
 })
 
 app.get('/about', (req, res) => {

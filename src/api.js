@@ -35,10 +35,12 @@ const getAllScores = async () => {
 	}
 }
 getAllScores();
-setInterval(()=>{getAllScores()}, 15000);
+
+//Calling getAllScores() in every 15sec interval
+// setInterval(()=>{getAllScores()}, 15000);
 
 
-module.exports = { ScoreController };
+module.exports = { ScoreController , all_match_sites};
 
 
 
