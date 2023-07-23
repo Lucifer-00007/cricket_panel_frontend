@@ -17,13 +17,6 @@ const all_match_sites = {
 }
 
 
-// api_url
-// kk(cricket_website)
-// Match_date
-// Match_key
-// T1_vs_T2 & Match_url
-// Inn1(sc/wk ovs) & Inn2(sc/wk ovs)
-
 const ScoreController = {}
 const getAllScores = async () => {
 
@@ -35,12 +28,15 @@ const getAllScores = async () => {
 				ScoreController[key] = response_data;
 			}
 		});
+		console.log('score updated!')
 
 	} catch (error) {
 		console.log('error -->', error);
 	}
 }
 getAllScores();
+setInterval(()=>{getAllScores()}, 15000);
+
 
 module.exports = { ScoreController };
 

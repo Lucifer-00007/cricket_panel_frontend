@@ -76,19 +76,16 @@
                                         <td class="topic">Inns 2</td>
                                     </tr>
                                     {{#each this.this}}
-                                    <tr class="match-details running-match">
-                                        <td>{{this.this.start_date_time}}</td>
+                                    <tr class="match-details {{checkLive this.this.match_status}}">
+                                        <td>{{checkBlank this.this.start_date_time 'dt'}}</td>
                                         <td class=''>{{@key}}</td>
-                                        <td><a class='{running-match}' target="_blank" href="{{this.this.match_urls}}">{{this.this.t1.n}} vs {{this.this.t2.n}}</a></td>
-                                        <td>{{this.this.i1.sc}}/{{this.this.i1.wk}}({{this.this.i1.ov}})</td>
-                                        <td>{{this.this.i2.sc}}/{{this.this.i2.wk}}({{this.this.i2.ov}})</td>
+                                        <td><a class='{{checkLive this.this.match_status}}' target="_blank" href="{{this.this.match_urls}}">{{this.this.t1.n}} vs {{this.this.t2.n}}</a></td>
+                                        <td>{{checkBlank this.this.i1.sc 'sc'}}/{{checkBlank this.this.i1.wk 'sc'}}({{checkBlank this.this.i1.ov 'sc'}})</td>
+                                        <td>{{checkBlank this.this.i2.sc 'sc'}}/{{checkBlank this.this.i2.wk 'sc'}}({{checkBlank this.this.i2.ov 'sc'}})</td>
                                     </tr>
                                     {{/each}}
                                 </tbody>
                             </table>
-                        </div>
-                        <div class="button">
-                            <a href="#">See All</a>
                         </div>
                     </div>
                 </div>
