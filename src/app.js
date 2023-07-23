@@ -56,10 +56,9 @@ hbs.handlebars.registerHelper('checkLive', (val) => {
 })
 
 // checkLive Func
-// hbs.handlebars.registerHelper('getApiUrl', (val) => {
-// 	console.log(all_match_sites[val])
-// 	return all_match_sites[val]
-// })
+hbs.handlebars.registerHelper('getApiUrl', (val) => {
+	return all_match_sites[val]
+})
 
 // formatDateTime Func
 const format_date_time = (unix) => {
