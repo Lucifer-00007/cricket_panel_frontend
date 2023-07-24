@@ -72,7 +72,7 @@ app.get('/', async (req, res) => {
 	res.set("Cache-Control", "no-cache")
 	res.set("Access-Control-Allow-Origin", "*")
 
-	res.render('index.hbs', { score_details: ScoreController })
+	res.render('index.hbs', { score_details: ScoreController, hasScore: Object.keys(ScoreController).length>0,  })
 })
 
 app.get('/about', (req, res) => {

@@ -60,42 +60,42 @@
             </div>
 
             {{!-- Score-section --}}
-            {{#each score_details}}
-            <div class="py-2">
-                <div class="sales-boxes">
-                    <div class="recent-sales box">
-                        <div class="title"><a href='{{getApiUrl @key}}'>{{@key}}</a></div>
-                        <div class="sales-details">
-                            <table class="table">
-                                <tbody id="">
-                                    <tr class="details">
-                                        <td class="topic">Date</td>
-                                        <td class="topic">Match Key</td>
-                                        <td class="topic">Match</td>
-                                        <td class="topic">Inns 1</td>
-                                        <td class="topic">Inns 2</td>
-                                    </tr>
-                                    {{#each this.this}}
-                                    <tr class="match-details {{checkLive this.this.match_status}}">
-                                        <td>{{checkBlank this.this.start_date_time 'dt'}}</td>
-                                        <td class=''>{{@key}}</td>
-                                        <td><a class='{{checkLive this.this.match_status}}' target="_blank" href="{{this.this.match_urls}}">{{this.this.t1.n}} vs {{this.this.t2.n}}</a></td>
-                                        <td>{{checkBlank this.this.i1.sc 'sc'}}/{{checkBlank this.this.i1.wk 'sc'}}({{checkBlank this.this.i1.ov 'sc'}})</td>
-                                        <td>{{checkBlank this.this.i2.sc 'sc'}}/{{checkBlank this.this.i2.wk 'sc'}}({{checkBlank this.this.i2.ov 'sc'}})</td>
-                                    </tr>
-                                    {{/each}}
-                                </tbody>
-                            </table>
+            {{#if hasScore}}
+                {{#each score_details}}
+                <div class="py-2">
+                    <div class="sales-boxes">
+                        <div class="recent-sales box">
+                            <div class="title"><a href='{{getApiUrl @key}}'>{{@key}}</a></div>
+                            <div class="sales-details">
+                                <table class="table">
+                                    <tbody id="">
+                                        <tr class="details">
+                                            <td class="topic">Date</td>
+                                            <td class="topic">Match Key</td>
+                                            <td class="topic">Match</td>
+                                            <td class="topic">Inns 1</td>
+                                            <td class="topic">Inns 2</td>
+                                        </tr>
+                                        {{#each this.this}}
+                                        <tr class="match-details {{checkLive this.this.match_status}}">
+                                            <td>{{checkBlank this.this.start_date_time 'dt'}}</td>
+                                            <td class=''>{{@key}}</td>
+                                            <td><a class='{{checkLive this.this.match_status}}' target="_blank" href="{{this.this.match_urls}}">{{this.this.t1.n}} vs {{this.this.t2.n}}</a></td>
+                                            <td>{{checkBlank this.this.i1.sc 'sc'}}/{{checkBlank this.this.i1.wk 'sc'}}({{checkBlank this.this.i1.ov 'sc'}})</td>
+                                            <td>{{checkBlank this.this.i2.sc 'sc'}}/{{checkBlank this.this.i2.wk 'sc'}}({{checkBlank this.this.i2.ov 'sc'}})</td>
+                                        </tr>
+                                        {{/each}}
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                {{/each}}
 
-            {{/each}}
-
-                
-            {{!-- {{>loader}} --}}
-            
+            {{else}}    
+                {{>loader}}
+            {{/if}}        
         </div>
 
         {{>footer}}
