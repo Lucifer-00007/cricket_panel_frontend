@@ -1,4 +1,3 @@
-
 let sidebar = document.querySelector(".sidebar");
 let sidebarBtn = document.querySelector(".sidebarBtn");
 sidebarBtn.onclick = function () {
@@ -13,7 +12,6 @@ function hide_dashboard() {
    let dashboard_slider = document.querySelector(".sidebar");
    dashboard_slider.classList.toggle("active");
 }
-
 
 function format_date_time(ufdt) {
    var ufdt_str = ufdt.toString()
@@ -47,7 +45,6 @@ function format_date_time(ufdt) {
    return `${f1[2]}/${f1[1]}/${f1[0]} ${hrs_part}:${min_part.toString().substr(0, 2)} ${am_or_pm}`
 }
 
-
 // Function to generate the dynamic sidebar
 function generateDynamicSidebar(siteName) {
    const dynamicSidebar = document.getElementById('dynamic-sidebar');
@@ -57,7 +54,7 @@ function generateDynamicSidebar(siteName) {
    a.onclick = () => scrollToCard(`${siteName}-card`);
    a.className = 'cursor-pointer';
    const icon = document.createElement('i');
-   icon.className = 'bx bx-box';
+   icon.className = 'bx bx-list-ul';
    const span = document.createElement('span');
    span.className = 'links_name';
    span.textContent = siteName;
@@ -80,7 +77,6 @@ function scrollToCard(cardId) {
 
    }
 }
-
 
 //All Matches 
 async function fetchMatchData(apiUrl, siteName) {
@@ -145,8 +141,8 @@ function generate_html(siteName, apiUrl, matchdata) {
    <div class="py-2" id='${siteName}-card'>
    <div class="sales-boxes">
       <div class="recent-sales box">
-         <div class="title"><a href='${apiUrl}'>${siteName}</a></div>
-         <div class="sales-details">
+         <div class="title"><a target="_blank" href='${apiUrl}'>${siteName}</a></div>
+         <div class="sales-details pb-4">
             <table class="table">
                <tbody>
                <tr class="details">
@@ -161,9 +157,6 @@ function generate_html(siteName, apiUrl, matchdata) {
                </tbody>
                </table> 
             </div>
-            <div class="button">
-               <a href="#">See All</a>
-            </div>
          </div>
       </div>
    </div>`;
@@ -171,18 +164,38 @@ function generate_html(siteName, apiUrl, matchdata) {
    var matchDetailsHTML = '';
 
    for (let [matchId, matchData] of Object.entries(matchdata)) {
-      if (matchData.t1 !== undefined) {
-         let match_status_class = (matchData.match_status === 'Live' ? 'running-match' : '');
-         matchDetailsHTML += `
-               <tr class="match-details ${match_status_class}">
-                  <td>${(matchData.start_date_time != undefined && matchData.start_date_time !== '' ? format_date_time(matchData.start_date_time) : '---')}</td>
-                  <td class=''>${matchId}</td>
-                  <td><a class='${match_status_class}' href="${(matchData.match_url ? matchData.match_url : '#')}">${(matchData.t1.n ? matchData.t1.n : '---')} v ${(matchData.t2.n ? matchData.t2.n : '---')}</a></td>
-                  <td>${matchData.i1.sc ? matchData.i1.sc : '---'}/${matchData.i1.wk ? matchData.i1.wk : '---'}(${matchData.i1.ov ? matchData.i1.ov : '---'})</td>
-                  <td>${matchData.i2.sc ? matchData.i2.sc : '---'}/${matchData.i2.wk ? matchData.i2.wk : '---'}(${matchData.i2.ov ? matchData.i2.ov : '---'})</td>
-               </tr>`;
+      if (matchData.t1 === undefined) {
+         continue; // Skip this iteration if t1 is undefined
       }
+
+      let matchStatusClass='';    
+      if(matchData.match_status === 'Live'){
+          matchStatusClass = 'running-match';    
+      }else if(matchData.match_status === 'Post'){
+         matchStatusClass = 'text-secondary';
+      }
+      
+      let startDate = matchData.start_date_time ? format_date_time(matchData.start_date_time) : '---';
+      let t1Name = matchData.t1.n || '---';
+      let t2Name = matchData.t2.n || '---';
+      let i1Score = matchData.i1.sc || '---';
+      let i1Wickets = matchData.i1.wk || '---';
+      let i1Overs = matchData.i1.ov || '---';
+      let i2Score = matchData.i2.sc || '---';
+      let i2Wickets = matchData.i2.wk || '---';
+      let i2Overs = matchData.i2.ov || '---';
+      let matchURL = matchData.match_url || '#';
+
+      matchDetailsHTML += `
+         <tr class="match-details ${matchStatusClass}">
+            <td>${startDate}</td>
+            <td>${matchId}</td>
+            <td><a class="${matchStatusClass}" target="_blank" href="${matchURL}">${t1Name} v ${t2Name}</a></td>
+            <td>${i1Score}/${i1Wickets}(${i1Overs})</td>
+            <td>${i2Score}/${i2Wickets}(${i2Overs})</td>
+         </tr>`;
    }
+
    var matchHTML = matchHTMLStart + matchDetailsHTML + matchHTMLEnd;
    return matchHTML;
 }
