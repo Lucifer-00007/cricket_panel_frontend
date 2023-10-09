@@ -1,4 +1,2 @@
-- deploy to firebase
-- fix atleast 1st and 2nd inns score in cbz
 
 
