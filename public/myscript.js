@@ -91,13 +91,23 @@ async function fetchMatchData(apiUrl, siteName) {
 }
 
 async function all_match_sites() {
+   //render Api
+   // const match_info = {
+   //    Crickbuzz: 'https://cricket-panel-backend.onrender.com/cbz',
+   //    Espn: 'https://cricket-panel-backend.onrender.com/espn',
+   //    NW18: 'https://cricket-panel-backend.onrender.com/nw18',
+   //    Sportskeeda: 'https://cricket-panel-backend.onrender.com/sk',
+   //    Cliclineguru: 'https://cricket-panel-backend.onrender.com/clg',
+   // };
+
+   //firebase Api
    const match_info = {
-      Crickbuzz: 'https://cricket-panel-backend.onrender.com/cbz',
-      Espn: 'https://cricket-panel-backend.onrender.com/espn',
-      NW18: 'https://cricket-panel-backend.onrender.com/nw18',
-      Sportskeeda: 'https://cricket-panel-backend.onrender.com/sk',
-      Cliclineguru: 'https://cricket-panel-backend.onrender.com/clg',
+      Crickbuzz: 'https://us-central1-micro-service-52cc5.cloudfunctions.net/cricketStats/cbz',
+      Espn: 'https://us-central1-micro-service-52cc5.cloudfunctions.net/cricketStats/espn',
+      NW18: 'https://us-central1-micro-service-52cc5.cloudfunctions.net/cricketStats/nw18',
+      Sportskeeda: 'https://us-central1-micro-service-52cc5.cloudfunctions.net/cricketStats/sk'
    };
+
    let dataReceived = false;
 
    try {
