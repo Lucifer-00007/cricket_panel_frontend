@@ -213,9 +213,9 @@ function generate_html(siteName, apiUrl, matchdata) {
 all_match_sites();
 
 //Reload page afer 30 min
-// setTimeout(function() {
-//   location.reload();
-// }, 1000*60*30);
+setTimeout(function() {
+  location.reload();
+}, 1000*30);
 
 
 
