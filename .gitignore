@@ -39,4 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# firebase
 .firebase/
+
+# old public folder
+public-old/
