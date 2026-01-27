@@ -14,7 +14,7 @@ export function SiteConfigCards({ sites }: SiteConfigCardsProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {sites.map((site) => {
                 return (
-                    <Card key={site} className="relative overflow-hidden shadow-md border-border group transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-gradient-to-b from-card to-card/50">
+                    <Card key={site} className="relative overflow-hidden shadow-sm border-0.5 dark:border-white group transition-all duration-300 hover:shadow-lg hover:-translate-y-1 bg-gradient-to-br">
                         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                         <CardHeader className="pb-3 flex flex-row items-center gap-3 space-y-0 relative z-10">
                             <div className="bg-primary/10 p-2.5 rounded-xl text-primary transform transition-transform group-hover:scale-110 group-hover:rotate-3 shadow-inner">
@@ -27,13 +27,13 @@ export function SiteConfigCards({ sites }: SiteConfigCardsProps) {
                                 <Input
                                     id={`${site}-key`}
                                     placeholder="Enter key..."
-                                    className="h-10 bg-background/50 border-border/40 focus:ring-primary/30 transition-all"
+                                    className="h-10 bg-background border-border transition-all"
                                 />
                             </div>
                             <div className="flex gap-2 pt-2">
                                 <Button
                                     size="sm"
-                                    className="w-full bg-primary text-primary-foreground font-bold tracking-wider shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all duration-300 transform active:scale-[0.98]"
+                                    className="w-full bg-primary text-primary-foreground font-bold tracking-wider transition-all duration-300 transform active:scale-[0.98]"
                                 >
                                     SUBMIT
                                 </Button>

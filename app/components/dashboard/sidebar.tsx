@@ -116,7 +116,7 @@ export function Sidebar({ sites }: SidebarProps) {
   return (
     <>
       {/* Desktop Sidebar */}
-      <aside className="hidden md:flex w-72 border-r border-sidebar-border bg-sidebar h-screen sticky top-0 z-30 shadow-[4px_0_24px_rgba(0,0,0,0.2)]">
+      <aside className="hidden md:flex w-72 border-r-2 dark:border-white/10 bg-sidebar dark:bg-sidebar/50 h-screen sticky top-0 z-30 shadow-[4px_0_24px_rgba(0,0,0,0.2)]">
         <SidebarContent sites={sites} onSiteClick={scrollToCard} />
       </aside>
 
