@@ -16,7 +16,7 @@ interface MatchCardProps {
 
 export function MatchCard({ siteName, apiUrl, data }: MatchCardProps) {
   return (
-    <Card id={`${siteName}-card`} className="scroll-mt-20 border-t-4 border-t-primary shadow-lg bg-card/40 backdrop-blur-sm overflow-hidden transition-all duration-500 hover:shadow-2xl">
+    <Card id={`${siteName}-card`} className="scroll-mt-20 border-t-4 border-t-primary shadow-lg bg-card dark:bg-card/95 overflow-hidden transition-all duration-500 hover:shadow-2xl">
       <CardHeader className="border-b border-border/40 bg-muted/20 pb-3 px-6">
         <CardTitle className="flex items-center gap-2">
           <a

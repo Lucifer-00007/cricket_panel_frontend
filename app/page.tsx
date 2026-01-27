@@ -17,11 +17,8 @@ export default async function Page() {
       {/* Header */}
       <header className="flex items-center justify-between pb-6 border-b">
         <div className="flex items-center gap-4">
-          <Button variant="ghost" size="icon" className="md:hidden">
-            <Menu className="h-6 w-6" />
-          </Button>
           <div>
-            <h1 className="text-2xl font-bold tracking-tight">Cricket Panel</h1>
+            <h1 className="text-2xl font-bold tracking-tight hidden md:block">Cricket Panel</h1>
             <p className="text-sm text-muted-foreground">Manage and track live cricket matches</p>
           </div>
         </div>

@@ -26,11 +26,11 @@ export function MatchTable({ data }: MatchTableProps) {
       <Table>
         <TableHeader>
           <TableRow className="hover:bg-transparent border-border/40">
-            <TableHead className="px-6 py-4 font-bold uppercase tracking-wider text-[10px] text-muted-foreground/60">Date</TableHead>
-            <TableHead className="font-bold uppercase tracking-wider text-[10px] text-muted-foreground/60">Match Key</TableHead>
-            <TableHead className="font-bold uppercase tracking-wider text-[10px] text-muted-foreground/60">Match</TableHead>
-            <TableHead className="font-bold uppercase tracking-wider text-[10px] text-muted-foreground/60">Inns 1</TableHead>
-            <TableHead className="font-bold uppercase tracking-wider text-[10px] text-muted-foreground/60">Inns 2</TableHead>
+            <TableHead className="px-6 py-4 font-bold uppercase tracking-wider text-[10px] text-muted-foreground">Date</TableHead>
+            <TableHead className="font-bold uppercase tracking-wider text-[10px] text-muted-foreground">Match Key</TableHead>
+            <TableHead className="font-bold uppercase tracking-wider text-[10px] text-muted-foreground">Match</TableHead>
+            <TableHead className="font-bold uppercase tracking-wider text-[10px] text-muted-foreground">Inns 1</TableHead>
+            <TableHead className="font-bold uppercase tracking-wider text-[10px] text-muted-foreground">Inns 2</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -43,7 +43,7 @@ export function MatchTable({ data }: MatchTableProps) {
                 key={matchId}
                 className={cn(
                   'transition-colors duration-200 border-border/20 px-6',
-                  isLive && 'bg-destructive/5 hover:bg-destructive/10',
+                  isLive && 'bg-destructive/5 hover:bg-destructive/10 dark:bg-destructive/15 dark:hover:bg-destructive/20',
                   !isLive && 'hover:bg-muted/30',
                   isCompleted && 'text-muted-foreground/60 select-none'
                 )}
@@ -51,7 +51,7 @@ export function MatchTable({ data }: MatchTableProps) {
                 <TableCell className="whitespace-nowrap px-6 py-4 text-xs font-medium">
                   {formatDateTime(match.start_date_time)}
                 </TableCell>
-                <TableCell className="font-mono text-[10px] font-bold text-muted-foreground/40">{matchId}</TableCell>
+                <TableCell className="font-mono text-[10px] font-bold text-muted-foreground/70">{matchId}</TableCell>
                 <TableCell>
                   <a
                     href={match.match_url || '#'}
@@ -76,10 +76,10 @@ export function MatchTable({ data }: MatchTableProps) {
                   </a>
                 </TableCell>
                 <TableCell className="font-mono text-xs font-bold text-foreground/80">
-                  {match.i1?.sc || '---'}/{match.i1?.wk || '---'} <span className="text-[10px] text-muted-foreground/40 font-normal">({match.i1?.ov || '---'})</span>
+                  {match.i1?.sc || '---'}/{match.i1?.wk || '---'} <span className="text-[10px] text-muted-foreground/70 font-normal">({match.i1?.ov || '---'})</span>
                 </TableCell>
                 <TableCell className="font-mono text-xs font-bold text-foreground/80">
-                  {match.i2?.sc || '---'}/{match.i2?.wk || '---'} <span className="text-[10px] text-muted-foreground/40 font-normal">({match.i2?.ov || '---'})</span>
+                  {match.i2?.sc || '---'}/{match.i2?.wk || '---'} <span className="text-[10px] text-muted-foreground/70 font-normal">({match.i2?.ov || '---'})</span>
                 </TableCell>
               </TableRow>
             )
