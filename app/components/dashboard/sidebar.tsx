@@ -2,7 +2,7 @@
 
 import { Button } from '@/components/ui/button'
 import { ScrollArea } from '@/components/ui/scroll-area'
-import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet'
+import { Sheet, SheetContent, SheetTrigger, SheetTitle } from '@/components/ui/sheet'
 import { Menu, Trophy, Activity, PlayCircle, Globe, Award } from 'lucide-react'
 import { useState } from 'react'
 
@@ -77,6 +77,7 @@ export function Sidebar({ sites }: SidebarProps) {
           </Button>
         </SheetTrigger>
         <SheetContent side="left" className="p-0 w-72 border-r-0 bg-sidebar">
+          <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
           <SidebarContent sites={sites} onSiteClick={scrollToCard} />
         </SheetContent>
       </Sheet>
