@@ -14,7 +14,7 @@ export function SiteConfigCards({ sites }: SiteConfigCardsProps) {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {sites.map((site) => {
                 return (
-                    <Card key={site} className="relative overflow-hidden shadow-md border-border/40 group transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-gradient-to-b from-card to-card/50">
+                    <Card key={site} className="relative overflow-hidden shadow-md border-border group transition-all duration-300 hover:shadow-xl hover:-translate-y-1 bg-gradient-to-b from-card to-card/50">
                         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                         <CardHeader className="pb-3 flex flex-row items-center gap-3 space-y-0 relative z-10">
                             <div className="bg-primary/10 p-2.5 rounded-xl text-primary transform transition-transform group-hover:scale-110 group-hover:rotate-3 shadow-inner">
