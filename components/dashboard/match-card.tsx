@@ -16,8 +16,8 @@ interface MatchCardProps {
 
 export function MatchCard({ siteName, apiUrl, data }: MatchCardProps) {
   return (
-    <Card id={`${siteName}-card`} className="scroll-mt-20">
-      <CardHeader>
+    <Card id={`${siteName}-card`} className="scroll-mt-20 border-t-4 border-t-primary shadow-sm">
+      <CardHeader className="border-b pb-3">
         <CardTitle className="flex items-center gap-2">
           <a
             href={apiUrl}

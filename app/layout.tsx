@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Sidebar } from "@/components/dashboard/sidebar";
+import { ThemeProvider } from "@/components/theme-provider"
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,19 +27,23 @@ export default function RootLayout({
   const sites = ['Crickbuzz', 'Espn', 'NW18', 'Sportskeeda']
 
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className="flex min-h-screen">
-          <Sidebar sites={sites} />
-          <main className="flex-1 p-6 md:p-8 overflow-auto">
-            {children}
-            <footer className="mt-12 text-center text-sm text-muted-foreground border-t pt-6">
-              Created With 🧡 By Lucifer
-            </footer>
-          </main>
-        </div>
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          <div className="flex min-h-screen">
+            <Sidebar sites={sites} />
+            <main className="flex-1 p-6 md:p-8 overflow-auto">
+              {children}
+            </main>
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );
