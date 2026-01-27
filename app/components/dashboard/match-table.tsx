@@ -25,12 +25,12 @@ export function MatchTable({ data }: MatchTableProps) {
     <div className="overflow-x-auto">
       <Table>
         <TableHeader>
-          <TableRow>
-            <TableHead>Date</TableHead>
-            <TableHead>Match Key</TableHead>
-            <TableHead>Match</TableHead>
-            <TableHead>Inns 1</TableHead>
-            <TableHead>Inns 2</TableHead>
+          <TableRow className="hover:bg-transparent border-border/40">
+            <TableHead className="px-6 py-4 font-bold uppercase tracking-wider text-[10px] text-muted-foreground/60">Date</TableHead>
+            <TableHead className="font-bold uppercase tracking-wider text-[10px] text-muted-foreground/60">Match Key</TableHead>
+            <TableHead className="font-bold uppercase tracking-wider text-[10px] text-muted-foreground/60">Match</TableHead>
+            <TableHead className="font-bold uppercase tracking-wider text-[10px] text-muted-foreground/60">Inns 1</TableHead>
+            <TableHead className="font-bold uppercase tracking-wider text-[10px] text-muted-foreground/60">Inns 2</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
@@ -42,33 +42,44 @@ export function MatchTable({ data }: MatchTableProps) {
               <TableRow
                 key={matchId}
                 className={cn(
-                  isLive && 'bg-destructive/10',
-                  isCompleted && 'text-muted-foreground'
+                  'transition-colors duration-200 border-border/20 px-6',
+                  isLive && 'bg-destructive/5 hover:bg-destructive/10',
+                  !isLive && 'hover:bg-muted/30',
+                  isCompleted && 'text-muted-foreground/60 select-none'
                 )}
               >
-                <TableCell className="whitespace-nowrap">
+                <TableCell className="whitespace-nowrap px-6 py-4 text-xs font-medium">
                   {formatDateTime(match.start_date_time)}
                 </TableCell>
-                <TableCell className="font-mono text-sm">{matchId}</TableCell>
+                <TableCell className="font-mono text-[10px] font-bold text-muted-foreground/40">{matchId}</TableCell>
                 <TableCell>
                   <a
                     href={match.match_url || '#'}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={cn(
-                      'hover:underline',
-                      isLive && 'text-destructive font-semibold',
+                      'flex items-center gap-2 group transition-all',
+                      isLive && 'text-destructive font-black',
+                      !isLive && !isCompleted && 'text-foreground/90 font-bold hover:text-primary',
                       isCompleted && 'text-muted-foreground'
                     )}
                   >
-                    {match.t1?.n || '---'} v {match.t2?.n || '---'}
+                    {isLive && (
+                      <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-red-500"></span>
+                      </span>
+                    )}
+                    <span className="group-hover:translate-x-0.5 transition-transform duration-300">
+                      {match.t1?.n || '---'} v {match.t2?.n || '---'}
+                    </span>
                   </a>
                 </TableCell>
-                <TableCell>
-                  {match.i1?.sc || '---'}/{match.i1?.wk || '---'} ({match.i1?.ov || '---'})
+                <TableCell className="font-mono text-xs font-bold text-foreground/80">
+                  {match.i1?.sc || '---'}/{match.i1?.wk || '---'} <span className="text-[10px] text-muted-foreground/40 font-normal">({match.i1?.ov || '---'})</span>
                 </TableCell>
-                <TableCell>
-                  {match.i2?.sc || '---'}/{match.i2?.wk || '---'} ({match.i2?.ov || '---'})
+                <TableCell className="font-mono text-xs font-bold text-foreground/80">
+                  {match.i2?.sc || '---'}/{match.i2?.wk || '---'} <span className="text-[10px] text-muted-foreground/40 font-normal">({match.i2?.ov || '---'})</span>
                 </TableCell>
               </TableRow>
             )
