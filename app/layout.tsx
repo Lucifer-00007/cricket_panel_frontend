@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Sidebar } from "@/components/dashboard/sidebar";
 import { ThemeProvider } from "@/components/theme-provider"
 
 const geistSans = Geist({
@@ -24,8 +23,6 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const sites = ['Crickbuzz', 'Espn', 'NW18', 'Sportskeeda']
-
   return (
     <html lang="en" suppressHydrationWarning>
       <body
@@ -37,12 +34,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex min-h-screen flex-col md:flex-row bg-background">
-            <Sidebar sites={sites} />
-            <main className="flex-1 p-6 md:p-8 overflow-auto bg-background/50 dark:bg-background/95">
-              {children}
-            </main>
-          </div>
+          {children}
         </ThemeProvider>
       </body>
     </html>
