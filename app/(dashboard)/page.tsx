@@ -15,14 +15,12 @@ export default async function Page() {
   return (
     <div className="space-y-10 pb-20">
       {/* Header */}
-      <header className="flex items-center justify-between pb-8 border-b border-border/40 dark:border-white/[0.05]">
-        <div className="flex items-center gap-4">
-          <div className="space-y-1">
-            <h1 className="text-3xl font-black tracking-tighter hidden md:block uppercase bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">Cricket Panel</h1>
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground/60">Control & Monitoring Dashboard</p>
-          </div>
+      <header className="relative flex items-center justify-center pb-8 border-b border-border/40 dark:border-white/[0.05]">
+        <div className="space-y-1 text-center">
+          <h1 className="text-3xl font-black tracking-tighter hidden md:block uppercase bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">Cricket Panel</h1>
+          <p className="text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground/60">Control & Monitoring Dashboard</p>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="absolute right-0 flex items-center gap-4">
           <ModeToggle />
         </div>
       </header>

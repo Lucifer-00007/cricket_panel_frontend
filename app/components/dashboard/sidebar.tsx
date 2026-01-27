@@ -78,29 +78,6 @@ function SidebarContent({ sites, onSiteClick }: { sites: string[]; onSiteClick: 
           </nav>
         </div>
       </ScrollArea>
-
-      <div className="mt-auto border-t border-sidebar-border/50 p-6 bg-black/10 dark:bg-black/20 backdrop-blur-md">
-        <div className="flex items-center gap-3 mb-4 px-2">
-          <div className="relative">
-            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 border-2 border-white/10 dark:border-white/5 flex items-center justify-center text-xs font-bold text-white shadow-xl">
-              AD
-            </div>
-            <div className="absolute -bottom-0.5 -right-0.5 h-3.5 w-3.5 rounded-full bg-green-500 border-2 border-sidebar dark:border-[#0F1117] animate-pulse shadow-sm"></div>
-          </div>
-          <div className="flex flex-col min-w-0">
-            <span className="text-sm font-bold text-white truncate leading-tight">Administrator</span>
-            <span className="text-[10px] text-green-400 font-bold tracking-wide uppercase opacity-90">Online</span>
-          </div>
-        </div>
-        <div className="flex items-center justify-between px-2 text-[10px] font-bold tracking-[0.2em] text-sidebar-foreground/20 uppercase">
-          <span>v1.0.0</span>
-          <div className="flex gap-1.5">
-            <div className="h-1.5 w-1.5 rounded-full bg-blue-500/30" />
-            <div className="h-1.5 w-1.5 rounded-full bg-blue-500/40" />
-            <div className="h-1.5 w-1.5 rounded-full bg-blue-500/50" />
-          </div>
-        </div>
-      </div>
     </div>
   )
 }
