@@ -6,15 +6,25 @@ interface StatusBadgeProps {
 }
 
 export function StatusBadge({ status }: StatusBadgeProps) {
-  const variants = {
+  const variants: Record<MatchStatus, 'destructive' | 'secondary' | 'default'> = {
     Live: 'destructive',
     Post: 'secondary',
     Pre: 'default',
-  } as const
+    Preview: 'default',
+    Completed: 'secondary',
+  }
+
+  const displayText: Record<MatchStatus, string> = {
+    Live: 'Live',
+    Post: 'Completed',
+    Pre: 'Upcoming',
+    Preview: 'Preview',
+    Completed: 'Completed',
+  }
 
   return (
     <Badge variant={variants[status]} className="text-xs">
-      {status === 'Post' ? 'Completed' : status === 'Pre' ? 'Upcoming' : 'Live'}
+      {displayText[status]}
     </Badge>
   )
 }

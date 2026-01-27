@@ -5,12 +5,12 @@ import { ModeToggle } from '@/components/mode-toggle'
 import { Button } from '@/components/ui/button'
 import { Menu } from 'lucide-react'
 
-export const revalidate = 1800 // 30 minutes
+export const revalidate = 60 // 60 seconds for real-time updates
 
 export default async function Page() {
   const siteDataList = await fetchAllMatches()
   const successfulSites = siteDataList.filter((site) => site.data && !site.error)
-  const sites = ['Crickbuzz', 'Espn', 'NW18', 'Sportskeeda']
+  const sites = ['Crickbuzz', 'Espn', 'NW18', 'Sportskeeda', 'CricketLineGuru']
 
   return (
     <div className="space-y-10 pb-20">
