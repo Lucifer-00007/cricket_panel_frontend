@@ -37,9 +37,9 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="flex min-h-screen flex-col md:flex-row">
+          <div className="flex min-h-screen flex-col md:flex-row bg-background">
             <Sidebar sites={sites} />
-            <main className="flex-1 p-6 md:p-8 overflow-auto bg-background dark:bg-muted/20">
+            <main className="flex-1 p-6 md:p-8 overflow-auto bg-background/50 dark:bg-background/95">
               {children}
             </main>
           </div>

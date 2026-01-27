@@ -13,16 +13,16 @@ export default async function Page() {
   const sites = ['Crickbuzz', 'Espn', 'NW18', 'Sportskeeda']
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-10 pb-20">
       {/* Header */}
-      <header className="flex items-center justify-between pb-6 border-b">
+      <header className="flex items-center justify-between pb-8 border-b border-border/40 dark:border-white/[0.05]">
         <div className="flex items-center gap-4">
-          <div>
-            <h1 className="text-2xl font-bold tracking-tight hidden md:block">Cricket Panel</h1>
-            <p className="text-sm text-muted-foreground">Manage and track live cricket matches</p>
+          <div className="space-y-1">
+            <h1 className="text-3xl font-black tracking-tighter hidden md:block uppercase bg-gradient-to-r from-foreground to-foreground/70 bg-clip-text text-transparent">Cricket Panel</h1>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground/60">Control & Monitoring Dashboard</p>
           </div>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-4">
           <ModeToggle />
         </div>
       </header>

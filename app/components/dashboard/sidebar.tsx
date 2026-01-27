@@ -26,23 +26,23 @@ function SidebarContent({ sites, onSiteClick }: { sites: string[]; onSiteClick: 
   }
 
   return (
-    <div className="flex flex-col h-full bg-sidebar/95 backdrop-blur-sm text-sidebar-foreground">
-      <div className="flex items-center gap-3 p-8 border-b border-sidebar-border/30">
+    <div className="flex flex-col h-full bg-sidebar dark:bg-sidebar text-sidebar-foreground">
+      <div className="flex items-center gap-3 p-8 border-b border-sidebar-border/50">
         <div className="relative group">
-          <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
-          <div className="relative bg-blue-600 p-2.5 rounded-lg transform transition-transform group-hover:scale-110 active:scale-95 shadow-lg">
+          <div className="absolute -inset-1 bg-gradient-to-r from-blue-600 to-indigo-600 rounded-lg blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200"></div>
+          <div className="relative bg-blue-600 p-2.5 rounded-lg transform transition-transform group-hover:scale-110 active:scale-95 shadow-lg shadow-blue-500/20">
             <Trophy className="h-6 w-6 text-white" />
           </div>
         </div>
         <div className="flex flex-col">
-          <span className="font-black text-2xl tracking-tighter text-white">MATCH</span>
-          <span className="text-[10px] uppercase tracking-[0.2em] text-blue-400/80 font-bold -mt-1">Control Center</span>
+          <span className="font-black text-2xl tracking-tighter text-white drop-shadow-sm">MATCH</span>
+          <span className="text-[10px] uppercase tracking-[0.2em] text-blue-400 font-bold -mt-1 opacity-90">Control Center</span>
         </div>
       </div>
 
       <ScrollArea className="flex-1 px-4 py-8">
         <div className="mb-4 px-2">
-          <h2 className="text-[10px] font-bold uppercase tracking-[0.3em] text-sidebar-foreground/30 mb-4 px-2">Sources</h2>
+          <h2 className="text-[10px] font-bold uppercase tracking-[0.3em] text-sidebar-foreground/40 mb-4 px-2">Sources</h2>
           <nav className="space-y-1.5">
             {sites.map((site) => {
               const Icon = siteIcons[site] || Trophy
@@ -54,20 +54,23 @@ function SidebarContent({ sites, onSiteClick }: { sites: string[]; onSiteClick: 
                   className={`
                     group w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold transition-all duration-300
                     ${isActive
-                      ? 'bg-blue-600/10 text-white translate-x-1 shadow-sm'
-                      : 'text-sidebar-foreground/60 hover:text-white hover:bg-white/5 hover:translate-x-1'
+                      ? 'bg-blue-600/15 text-white translate-x-1 shadow-[0_0_20px_rgba(59,130,246,0.1)]'
+                      : 'text-sidebar-foreground/60 hover:text-white hover:bg-white/5 dark:hover:bg-white/[0.03] hover:translate-x-1'
                     }
                   `}
                 >
                   <div className={`
                     p-1.5 rounded-lg transition-all duration-300
-                    ${isActive ? 'bg-blue-600 text-white shadow-md' : 'bg-sidebar-accent/50 text-sidebar-foreground/40 group-hover:text-white group-hover:bg-blue-600/50'}
+                    ${isActive
+                      ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/40'
+                      : 'bg-sidebar-accent/50 dark:bg-white/5 text-sidebar-foreground/40 group-hover:text-white group-hover:bg-blue-600/80 group-hover:shadow-md'
+                    }
                   `}>
                     <Icon className="h-4 w-4" />
                   </div>
                   <span className="flex-1 text-left">{site}</span>
                   {isActive && (
-                    <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_8px_rgba(59,130,246,0.5)]" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-blue-500 shadow-[0_0_12px_rgba(59,130,246,0.8)] animate-pulse" />
                   )}
                 </button>
               )
@@ -76,25 +79,25 @@ function SidebarContent({ sites, onSiteClick }: { sites: string[]; onSiteClick: 
         </div>
       </ScrollArea>
 
-      <div className="mt-auto border-t border-sidebar-border/30 p-6 bg-black/10">
+      <div className="mt-auto border-t border-sidebar-border/50 p-6 bg-black/10 dark:bg-black/20 backdrop-blur-md">
         <div className="flex items-center gap-3 mb-4 px-2">
           <div className="relative">
-            <div className="h-9 w-9 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 border-2 border-white/10 flex items-center justify-center text-xs font-bold text-white shadow-xl">
+            <div className="h-10 w-10 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 border-2 border-white/10 dark:border-white/5 flex items-center justify-center text-xs font-bold text-white shadow-xl">
               AD
             </div>
-            <div className="absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full bg-green-500 border-2 border-[#1A365D] animate-pulse"></div>
+            <div className="absolute -bottom-0.5 -right-0.5 h-3.5 w-3.5 rounded-full bg-green-500 border-2 border-sidebar dark:border-[#0F1117] animate-pulse shadow-sm"></div>
           </div>
           <div className="flex flex-col min-w-0">
-            <span className="text-sm font-bold text-white truncate">Administrator</span>
-            <span className="text-[10px] text-green-400 font-medium">Online</span>
+            <span className="text-sm font-bold text-white truncate leading-tight">Administrator</span>
+            <span className="text-[10px] text-green-400 font-bold tracking-wide uppercase opacity-90">Online</span>
           </div>
         </div>
-        <div className="flex items-center justify-between px-2 text-[10px] font-bold tracking-widest text-sidebar-foreground/20">
+        <div className="flex items-center justify-between px-2 text-[10px] font-bold tracking-[0.2em] text-sidebar-foreground/20 uppercase">
           <span>v1.0.0</span>
-          <div className="flex gap-2">
-            <div className="h-1 w-1 rounded-full bg-blue-500/50" />
-            <div className="h-1 w-1 rounded-full bg-blue-500/50" />
-            <div className="h-1 w-1 rounded-full bg-blue-500/50" />
+          <div className="flex gap-1.5">
+            <div className="h-1.5 w-1.5 rounded-full bg-blue-500/30" />
+            <div className="h-1.5 w-1.5 rounded-full bg-blue-500/40" />
+            <div className="h-1.5 w-1.5 rounded-full bg-blue-500/50" />
           </div>
         </div>
       </div>
@@ -116,26 +119,26 @@ export function Sidebar({ sites }: SidebarProps) {
   return (
     <>
       {/* Desktop Sidebar */}
-      <aside className="hidden md:flex w-72 border-r-2 dark:border-white/10 bg-sidebar dark:bg-sidebar/50 h-screen sticky top-0 z-30 shadow-[4px_0_24px_rgba(0,0,0,0.2)]">
+      <aside className="hidden md:flex w-72 border-r-2 border-sidebar-border bg-sidebar dark:bg-sidebar h-screen sticky top-0 z-30 shadow-[4px_0_32px_rgba(0,0,0,0.5)] dark:shadow-[4px_0_32px_rgba(59,130,246,0.08)]">
         <SidebarContent sites={sites} onSiteClick={scrollToCard} />
       </aside>
 
       {/* Mobile Header & Sidebar */}
-      <div className="md:hidden sticky top-0 z-40 flex items-center px-4 py-3 bg-sidebar/95 backdrop-blur-md border-b border-sidebar-border/30 text-sidebar-foreground shadow-sm">
+      <div className="md:hidden sticky top-0 z-40 flex items-center px-4 py-3 bg-sidebar/95 dark:bg-sidebar/80 backdrop-blur-md border-b border-sidebar-border/30 dark:border-white/5 text-sidebar-foreground shadow-lg">
         <Sheet open={open} onOpenChange={setOpen}>
           <SheetTrigger asChild>
-            <Button variant="ghost" size="icon" className="mr-3 hover:bg-sidebar-accent/50 text-sidebar-foreground">
+            <Button variant="ghost" size="icon" className="mr-3 hover:bg-white/5 text-sidebar-foreground">
               <Menu className="h-6 w-6" />
             </Button>
           </SheetTrigger>
-          <SheetContent side="left" className="p-0 w-72 border-r-0 bg-sidebar shadow-2xl">
+          <SheetContent side="left" className="p-0 w-72 border-r-0 bg-sidebar dark:bg-sidebar/90 shadow-2xl">
             <SheetTitle className="sr-only">Navigation Menu</SheetTitle>
             <SidebarContent sites={sites} onSiteClick={scrollToCard} />
           </SheetContent>
         </Sheet>
         <div className="flex items-center gap-2">
-           <Trophy className="h-5 w-5 text-blue-500" />
-           <span className="font-bold text-lg tracking-tight">Cricket Panel</span>
+          <Trophy className="h-5 w-5 text-blue-500 drop-shadow-[0_0_8px_rgba(59,130,246,0.3)]" />
+          <span className="font-black text-lg tracking-tight text-white">CRICKET PANEL</span>
         </div>
       </div>
     </>
