@@ -10,18 +10,8 @@ interface SidebarProps {
   sites: string[]
 }
 
-export function Sidebar({ sites }: SidebarProps) {
-  const [open, setOpen] = useState(false)
-
-  const scrollToCard = (siteId: string) => {
-    const element = document.getElementById(`${siteId}-card`)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
-      setOpen(false)
-    }
-  }
-
-  const SidebarContent = () => (
+function SidebarContent({ sites, onSiteClick }: { sites: string[]; onSiteClick: (site: string) => void }) {
+  return (
     <div className="flex flex-col h-full">
       <div className="flex items-center gap-2 p-6 border-b">
         <Trophy className="h-6 w-6" />
@@ -34,7 +24,7 @@ export function Sidebar({ sites }: SidebarProps) {
               key={site}
               variant="ghost"
               className="w-full justify-start"
-              onClick={() => scrollToCard(site)}
+              onClick={() => onSiteClick(site)}
             >
               {site}
             </Button>
@@ -43,12 +33,24 @@ export function Sidebar({ sites }: SidebarProps) {
       </ScrollArea>
     </div>
   )
+}
+
+export function Sidebar({ sites }: SidebarProps) {
+  const [open, setOpen] = useState(false)
+
+  const scrollToCard = (siteId: string) => {
+    const element = document.getElementById(`${siteId}-card`)
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' })
+      setOpen(false)
+    }
+  }
 
   return (
     <>
       {/* Desktop Sidebar */}
       <aside className="hidden md:flex w-60 border-r bg-card h-screen sticky top-0">
-        <SidebarContent />
+        <SidebarContent sites={sites} onSiteClick={scrollToCard} />
       </aside>
 
       {/* Mobile Sidebar */}
@@ -59,7 +61,7 @@ export function Sidebar({ sites }: SidebarProps) {
           </Button>
         </SheetTrigger>
         <SheetContent side="left" className="p-0 w-60">
-          <SidebarContent />
+          <SidebarContent sites={sites} onSiteClick={scrollToCard} />
         </SheetContent>
       </Sheet>
     </>

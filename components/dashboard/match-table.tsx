@@ -15,7 +15,7 @@ interface MatchTableProps {
 }
 
 export function MatchTable({ data }: MatchTableProps) {
-  const matches = Object.entries(data).filter(([_, match]) => match.t1)
+  const matches = Object.entries(data).filter(([, match]) => match.t1)
 
   if (matches.length === 0) {
     return <p className="text-muted-foreground text-center py-8">No matches available</p>
