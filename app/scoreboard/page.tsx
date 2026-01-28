@@ -1,6 +1,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { Badge } from '@/components/ui/badge'
+import { ModeToggle } from '@/components/mode-toggle'
 import { MatchHeader } from '@/components/scoreboard/match-header'
 import { BattingTable } from '@/components/scoreboard/batting-table'
 import { BowlingTable } from '@/components/scoreboard/bowling-table'
@@ -290,75 +291,80 @@ const dummyScoreboardData: ScoreboardData = {
 
 export default function ScoreboardPage() {
     return (
-        <div className="space-y-6 pb-20">
-            {/* Header */}
-            <header className="flex items-center gap-4 pb-4 border-b border-border/40">
-                <h1 className="text-2xl font-semibold text-foreground/90">Match Scoreboard</h1>
-            </header>
+        <div className="min-h-screen bg-background">
+            <div className="max-w-7xl mx-auto p-6 md:p-8 space-y-6 pb-20">
+                {/* Header */}
+                <header className="flex items-center gap-4 pb-4 border-b border-border/40">
+                    <h1 className="text-2xl font-semibold text-foreground/90">Match Scoreboard</h1>
+                    <div className="ml-auto flex items-center gap-4">
+                        <ModeToggle />
+                    </div>
+                </header>
 
-            {/* Match Header */}
-            <MatchHeader
-                matchTitle={dummyScoreboardData.matchTitle}
-                venue={dummyScoreboardData.venue}
-                date={dummyScoreboardData.date}
-                matchType={dummyScoreboardData.matchType}
-                tossInfo={dummyScoreboardData.tossInfo}
-                result={dummyScoreboardData.result}
-            />
+                {/* Match Header */}
+                <MatchHeader
+                    matchTitle={dummyScoreboardData.matchTitle}
+                    venue={dummyScoreboardData.venue}
+                    date={dummyScoreboardData.date}
+                    matchType={dummyScoreboardData.matchType}
+                    tossInfo={dummyScoreboardData.tossInfo}
+                    result={dummyScoreboardData.result}
+                />
 
-            {/* Innings Cards */}
-            {dummyScoreboardData.innings.map((innings, index) => (
-                <Card key={index} className="border border-border/50 shadow-sm overflow-hidden bg-card">
-                    <CardHeader className="px-6 py-4 bg-muted/30">
-                        <div className="flex items-center justify-between">
-                            <CardTitle className="text-lg font-bold">
-                                {innings.teamName} Innings
-                            </CardTitle>
-                            <Badge variant="secondary" className="text-base font-bold">
-                                {innings.score}/{innings.wickets} ({innings.overs} ov)
-                            </Badge>
-                        </div>
-                    </CardHeader>
-                    <Separator className="h-px bg-border/50" />
-
-                    <CardContent className="p-0">
-                        {/* Batting Section */}
-                        <div className="p-6 space-y-4">
-                            <h3 className="text-base font-bold text-foreground">Batting</h3>
-                            <BattingTable batsmen={innings.batting} />
-
-                            {/* Extras */}
-                            <div className="text-sm text-muted-foreground">
-                                <span className="font-semibold text-foreground">Extras:</span>{' '}
-                                {innings.extras.total} (b {innings.extras.byes}, lb {innings.extras.legByes}, w {innings.extras.wides}, nb {innings.extras.noBalls})
+                {/* Innings Cards */}
+                {dummyScoreboardData.innings.map((innings, index) => (
+                    <Card key={index} className="border border-border/50 shadow-sm overflow-hidden bg-card">
+                        <CardHeader className="px-6 py-4 bg-muted/30">
+                            <div className="flex items-center justify-between">
+                                <CardTitle className="text-lg font-bold">
+                                    {innings.teamName} Innings
+                                </CardTitle>
+                                <Badge variant="secondary" className="text-base font-bold">
+                                    {innings.score}/{innings.wickets} ({innings.overs} ov)
+                                </Badge>
                             </div>
-
-                            {/* Fall of Wickets */}
-                            <FallOfWickets wickets={innings.fallOfWickets} />
-                        </div>
-
+                        </CardHeader>
                         <Separator className="h-px bg-border/50" />
 
-                        {/* Bowling Section */}
-                        <div className="p-6 space-y-4">
-                            <h3 className="text-base font-bold text-foreground">Bowling</h3>
-                            <BowlingTable bowlers={innings.bowling} />
-                        </div>
-                    </CardContent>
-                </Card>
-            ))}
+                        <CardContent className="p-0">
+                            {/* Batting Section */}
+                            <div className="p-6 space-y-4">
+                                <h3 className="text-base font-bold text-foreground">Batting</h3>
+                                <BattingTable batsmen={innings.batting} />
 
-            {/* Player of the Match */}
-            {dummyScoreboardData.playerOfTheMatch && (
-                <Card className="border border-border/50 shadow-sm bg-card">
-                    <CardContent className="p-6">
-                        <p className="text-sm">
-                            <span className="font-bold text-foreground">Player of the Match:</span>{' '}
-                            <span className="text-primary font-semibold">{dummyScoreboardData.playerOfTheMatch}</span>
-                        </p>
-                    </CardContent>
-                </Card>
-            )}
+                                {/* Extras */}
+                                <div className="text-sm text-muted-foreground">
+                                    <span className="font-semibold text-foreground">Extras:</span>{' '}
+                                    {innings.extras.total} (b {innings.extras.byes}, lb {innings.extras.legByes}, w {innings.extras.wides}, nb {innings.extras.noBalls})
+                                </div>
+
+                                {/* Fall of Wickets */}
+                                <FallOfWickets wickets={innings.fallOfWickets} />
+                            </div>
+
+                            <Separator className="h-px bg-border/50" />
+
+                            {/* Bowling Section */}
+                            <div className="p-6 space-y-4">
+                                <h3 className="text-base font-bold text-foreground">Bowling</h3>
+                                <BowlingTable bowlers={innings.bowling} />
+                            </div>
+                        </CardContent>
+                    </Card>
+                ))}
+
+                {/* Player of the Match */}
+                {dummyScoreboardData.playerOfTheMatch && (
+                    <Card className="border border-border/50 shadow-sm bg-card">
+                        <CardContent className="p-6">
+                            <p className="text-sm">
+                                <span className="font-bold text-foreground">Player of the Match:</span>{' '}
+                                <span className="text-primary font-semibold">{dummyScoreboardData.playerOfTheMatch}</span>
+                            </p>
+                        </CardContent>
+                    </Card>
+                )}
+            </div>
         </div>
     )
 }
