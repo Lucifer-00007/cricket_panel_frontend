@@ -22,7 +22,7 @@ export default function ScoreboardPage() {
                 {/* Header */}
                 <div className="flex items-center justify-between pb-4">
                     <Link href="/">
-                        <Button variant="outline">
+                        <Button variant="outline" className="dark:border-white/20 dark:hover:bg-primary/30">
                             <ArrowLeft className="mr-2 h-4 w-4" />
                             Back to Home
                         </Button>
