@@ -1,12 +1,9 @@
 import {
   Card,
   CardContent,
-  CardHeader,
-  CardTitle,
 } from '@/components/ui/card'
 import { MatchTable } from './match-table'
 import { type SiteData } from '@/lib/types'
-import { ExternalLink } from 'lucide-react'
 
 interface MatchCardProps {
   siteName: string

@@ -123,7 +123,7 @@ export function SiteConfigCards({ sites }: SiteConfigCardsProps) {
                                     />
                                     <Button
                                         size="sm"
-                                        className="h-9 px-4 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold transition-all duration-300 hover:scale-105 shadow-sm hover:shadow-md"
+                                        className="h-9 px-4 bg-primary hover:bg-primary/90 text-primary-foreground font-semibold transition-all duration-300 hover:scale-105"
                                     >
                                         <Search className="h-4 w-4" />
                                     </Button>

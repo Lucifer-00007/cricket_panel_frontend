@@ -46,7 +46,7 @@ export function MatchTable({ data }: MatchTableProps) {
                   'transition-all duration-300 border-border/20 dark:border-white/[0.03] px-6 group/row',
                   isLive && 'text-destructive dark:text-red-400',
                   isUpcoming && 'text-blue-600 dark:text-blue-400',
-                  isCompleted && 'text-foreground/80 dark:text-foreground/60',
+                  isCompleted && 'text-foreground/40 dark:text-foreground/60',
                   'hover:bg-muted/30 dark:hover:bg-white/[0.02]'
                 )}
               >
@@ -63,7 +63,7 @@ export function MatchTable({ data }: MatchTableProps) {
                       'flex items-center gap-2 transition-all hover:underline font-semibold',
                       isLive && 'text-destructive dark:text-red-400',
                       isUpcoming && 'text-blue-600 dark:text-blue-400',
-                      isCompleted && 'text-foreground/90 dark:text-foreground/80'
+                      isCompleted && 'text-foreground/40 dark:text-foreground/60'
                     )}
                   >
                     <span className="truncate max-w-[200px] lg:max-w-none">
