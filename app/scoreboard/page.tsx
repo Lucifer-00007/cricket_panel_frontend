@@ -11,18 +11,22 @@ import { Partnerships } from '@/components/scoreboard/partnerships'
 import { Powerplays } from '@/components/scoreboard/powerplays'
 import { MatchInfoSection } from '@/components/scoreboard/match-info-section'
 import { MATCH_DATA } from '@/constants/match-data'
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
 
 export default function ScoreboardPage() {
     return (
         <div className="min-h-screen bg-background">
             <div className="max-w-7xl mx-auto p-6 md:p-8 space-y-6 pb-20">
                 {/* Header */}
-                <header className="flex items-center gap-4 pb-4 border-b border-border/40 dark:border-border/30">
-                    <h1 className="text-2xl font-semibold text-foreground dark:text-white/95">Cricket Panel</h1>
-                    <div className="ml-auto flex items-center gap-4">
+                <div className="flex items-center justify-between pb-4">
+                    <Link href="/">
+                        <Button variant="outline">Back to Home</Button>
+                    </Link>
+                    <div className="flex items-center gap-4">
                         <ModeToggle />
                     </div>
-                </header>
+                </div>
 
                 {/* Match Header */}
                 <MatchHeader
