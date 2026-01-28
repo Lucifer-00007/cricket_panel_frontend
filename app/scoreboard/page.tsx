@@ -18,7 +18,7 @@ export default function ScoreboardPage() {
             <div className="max-w-7xl mx-auto p-6 md:p-8 space-y-6 pb-20">
                 {/* Header */}
                 <header className="flex items-center gap-4 pb-4 border-b border-border/40 dark:border-border/30">
-                    <h1 className="text-2xl font-semibold text-foreground dark:text-white/95">Match Scoreboard</h1>
+                    <h1 className="text-2xl font-semibold text-foreground dark:text-white/95">Cricket Panel</h1>
                     <div className="ml-auto flex items-center gap-4">
                         <ModeToggle />
                     </div>
