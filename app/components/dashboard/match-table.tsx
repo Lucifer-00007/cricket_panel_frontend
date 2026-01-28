@@ -61,7 +61,7 @@ export function MatchTable({ data, siteName }: MatchTableProps) {
                 <TableCell className="font-mono text-xs font-medium">
                   {source ? (
                     <Link 
-                      href={`/scoreboard/${source}/${matchId}`}
+                      href={`/scoreboard/view?source=${source}&matchId=${matchId}`}
                       className="text-blue-600 dark:text-blue-400 hover:underline hover:text-blue-800 dark:hover:text-blue-300 transition-colors"
                     >
                       {matchId}
