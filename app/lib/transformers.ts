@@ -1,4 +1,4 @@
-import { type ScorecardResponse, type InningsRaw, type MatchInfoRaw } from './types'
+import { type ScorecardResponse, type InningsRaw } from './types'
 import { type ScoreboardData, type InningsData, type BatsmanStats, type BowlerStats, type FallOfWicket } from './scoreboard-types'
 
 function parseScoreString(scoreStr: string): { score: number, wickets: number, overs: number } {
@@ -11,7 +11,7 @@ function parseScoreString(scoreStr: string): { score: number, wickets: number, o
 
   // Remove "Ov" and parens
   const cleanStr = scoreStr.replace(/[()]/g, '').replace(/Ov/g, '').trim()
-  
+
   // Split score/wickets and overs
   // "202-10 69.2" or "180/4 20.0"
   const parts = cleanStr.split(' ')
@@ -28,7 +28,7 @@ function parseScoreString(scoreStr: string): { score: number, wickets: number, o
     const [s, w] = scoreWicketsPart.split(separator)
     score = parseInt(s) || 0
     wickets = parseInt(w) || 0
-    
+
     // Sometimes it might be wickets/score? usually score/wickets.
     // Assuming standard score/wickets or score-wickets
   }
@@ -39,29 +39,29 @@ function parseScoreString(scoreStr: string): { score: number, wickets: number, o
 function parseExtras(extrasStr: string): { total: number, byes: number, legByes: number, wides: number, noBalls: number } {
   // Format: "(b 1, lb 2, w 1, nb 0, p 0)"
   const result = { total: 0, byes: 0, legByes: 0, wides: 0, noBalls: 0 }
-  
+
   if (!extrasStr) return result
 
   const clean = extrasStr.replace(/[()]/g, '')
   // "b 1, lb 2, w 1, nb 0, p 0"
-  
+
   // Extract total if present (not explicitly in example string, but InningsData expects it)
   // Usually extras string implies the breakdown. 
   // API example: "(b 1, lb 2, w 1, nb 0, p 0)"
-  
+
   const parts = clean.split(',')
-  
+
   parts.forEach(part => {
     const p = part.trim()
     const [type, val] = p.split(' ')
     const value = parseInt(val) || 0
-    
+
     if (type === 'b') result.byes = value
     if (type === 'lb') result.legByes = value
     if (type === 'w') result.wides = value
     if (type === 'nb') result.noBalls = value
   })
-  
+
   result.total = result.byes + result.legByes + result.wides + result.noBalls
   return result
 }
@@ -76,22 +76,22 @@ function parseFallOfWickets(fowList: string[]): FallOfWicket[] {
       const [scoreWicket, details] = fow.split('(')
       const cleanScoreWicket = scoreWicket.trim()
       const cleanDetails = details.replace(')', '').trim()
-      
+
       const separator = cleanScoreWicket.includes('-') ? '-' : '/'
       const [scoreStr, wicketStr] = cleanScoreWicket.split(separator)
-      
+
       // Details: "Name, 2.1"
       const detailParts = cleanDetails.split(',')
       const oversStr = detailParts[detailParts.length - 1].trim() // Last part is overs
       const batsman = detailParts.slice(0, detailParts.length - 1).join(',').trim()
-      
+
       return {
         score: parseInt(scoreStr) || 0,
         wickets: parseInt(wicketStr) || 0,
         batsman: batsman,
         overs: parseFloat(oversStr) || 0
       }
-    } catch (e) {
+    } catch {
       return { score: 0, wickets: 0, batsman: '', overs: 0 }
     }
   })
@@ -100,7 +100,7 @@ function parseFallOfWickets(fowList: string[]): FallOfWicket[] {
 function transformInnings(inningsRaw: InningsRaw): InningsData {
   const { score, wickets, overs } = parseScoreString(inningsRaw.inningsData.totalScore)
   const extras = parseExtras(inningsRaw.extrasEle)
-  
+
   const batting: BatsmanStats[] = (inningsRaw.inningsData.batsmen || []).map(b => ({
     name: b.name,
     dismissal: b.outHow,
@@ -131,14 +131,14 @@ function transformInnings(inningsRaw: InningsRaw): InningsData {
     bowling,
     fallOfWickets: parseFallOfWickets(inningsRaw.fallOfWickets),
     // Derive partnerships/powerplays if possible, or leave empty
-    partnerships: [], 
+    partnerships: [],
     powerplays: []
   }
 }
 
 export function transformScorecardData(raw: ScorecardResponse): ScoreboardData {
   const innings: InningsData[] = []
-  
+
   if (raw.innings1) innings.push(transformInnings(raw.innings1))
   if (raw.innings2) innings.push(transformInnings(raw.innings2))
   if (raw.innings3) innings.push(transformInnings(raw.innings3))

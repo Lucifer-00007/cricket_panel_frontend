@@ -7,7 +7,7 @@ import {
     TableRow,
 } from '@/components/ui/table'
 import { type BatsmanStats } from '@/lib/scoreboard-types'
-import { cn } from '@/lib/utils'
+
 
 interface BattingTableProps {
     batsmen: BatsmanStats[]

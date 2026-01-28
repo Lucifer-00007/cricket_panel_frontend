@@ -10,7 +10,7 @@ interface SiteConfigCardsProps {
     sites: string[]
 }
 
-const siteIcons: Record<string, { icon: any, color: string, gradientFrom: string, gradientTo: string }> = {
+const siteIcons: Record<string, { icon: React.ElementType, color: string, gradientFrom: string, gradientTo: string }> = {
     'Crickbuzz': {
         icon: Activity,
         color: 'bg-blue-100 text-blue-600 dark:bg-blue-500/20 dark:text-blue-400',
