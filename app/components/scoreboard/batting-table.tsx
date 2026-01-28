@@ -20,7 +20,7 @@ export function BattingTable({ batsmen }: BattingTableProps) {
                 <TableHeader className="bg-muted dark:bg-white/5">
                     <TableRow className="hover:bg-transparent border-border/40 dark:border-white/[0.05]">
                         <TableHead className="px-6 py-4 font-bold text-sm text-foreground">Batsman</TableHead>
-                        <TableHead className="font-bold text-sm text-foreground">Dismissal</TableHead>
+                        <TableHead className="font-bold text-sm text-foreground">Status</TableHead>
                         <TableHead className="font-bold text-sm text-foreground text-right">R</TableHead>
                         <TableHead className="font-bold text-sm text-foreground text-right">B</TableHead>
                         <TableHead className="font-bold text-sm text-foreground text-right">4s</TableHead>
