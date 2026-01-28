@@ -10,12 +10,12 @@ export function FallOfWickets({ wickets }: FallOfWicketsProps) {
     }
 
     return (
-        <div className="space-y-2">
-            <h3 className="text-sm font-bold text-foreground">Fall of Wickets</h3>
-            <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted-foreground">
+        <div className="space-y-2 my-2.5">
+            <h3 className="text-sm font-bold text-foreground dark:text-white/90">Fall of Wickets</h3>
+            <div className="flex flex-wrap gap-x-6 gap-y-2 text-sm">
                 {wickets.map((wicket, index) => (
-                    <span key={index} className="font-mono tabular-nums">
-                        {wicket.score}-{wicket.wickets} ({wicket.batsman}, {wicket.overs} ov)
+                    <span key={index} className="font-mono tabular-nums text-muted-foreground dark:text-white/70">
+                        {wicket.score}-{wicket.wickets} <span className="text-muted-foreground/70 dark:text-white/50">({wicket.batsman}, {wicket.overs} ov)</span>
                     </span>
                 ))}
             </div>

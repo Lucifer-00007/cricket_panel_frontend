@@ -6,6 +6,7 @@ import { MatchHeader } from '@/components/scoreboard/match-header'
 import { BattingTable } from '@/components/scoreboard/batting-table'
 import { BowlingTable } from '@/components/scoreboard/bowling-table'
 import { FallOfWickets } from '@/components/scoreboard/fall-of-wickets'
+import { PartnershipInfo } from '@/components/scoreboard/partnership-info'
 import { type ScoreboardData } from '@/lib/scoreboard-types'
 
 // Dummy data matching the reference image style
@@ -136,6 +137,13 @@ const dummyScoreboardData: ScoreboardData = {
                 { score: 138, wickets: 3, batsman: 'van der Dussen', overs: 15.3 },
                 { score: 155, wickets: 4, batsman: 'Miller', overs: 17.5 },
             ],
+            yetToBat: ['Wiaan Mulder', 'Kagiso Rabada', 'Keshav Maharaj', 'Anrich Nortje', 'Tabraiz Shamsi'],
+            currentPartnership: {
+                batsman1: 'Aiden Markram',
+                batsman2: 'Heinrich Klaasen',
+                runs: 30,
+                balls: 16
+            }
         },
         {
             teamName: 'West Indies',
@@ -285,6 +293,13 @@ const dummyScoreboardData: ScoreboardData = {
                 { score: 155, wickets: 6, batsman: 'Holder', overs: 19.1 },
                 { score: 157, wickets: 7, batsman: 'Hosein', overs: 19.5 },
             ],
+            yetToBat: ['Gudakesh Motie'],
+            currentPartnership: {
+                batsman1: 'Romario Shepherd',
+                batsman2: 'Alzarri Joseph',
+                runs: 2,
+                balls: 4
+            }
         },
     ],
 }
@@ -294,8 +309,8 @@ export default function ScoreboardPage() {
         <div className="min-h-screen bg-background">
             <div className="max-w-7xl mx-auto p-6 md:p-8 space-y-6 pb-20">
                 {/* Header */}
-                <header className="flex items-center gap-4 pb-4 border-b border-border/40">
-                    <h1 className="text-2xl font-semibold text-foreground/90">Match Scoreboard</h1>
+                <header className="flex items-center gap-4 pb-4 border-b border-border/40 dark:border-border/30">
+                    <h1 className="text-2xl font-semibold text-foreground dark:text-white/95">Match Scoreboard</h1>
                     <div className="ml-auto flex items-center gap-4">
                         <ModeToggle />
                     </div>
@@ -313,51 +328,79 @@ export default function ScoreboardPage() {
 
                 {/* Innings Cards */}
                 {dummyScoreboardData.innings.map((innings, index) => (
-                    <Card key={index} className="border border-border/50 shadow-sm overflow-hidden bg-card">
-                        <ScoreHeader className="px-6 py-4 bg-muted dark:bg-white/10">
+                    <Card key={index} className="border border-border/50 dark:border-border/30 shadow-lg dark:shadow-2xl overflow-hidden bg-card">
+                        <ScoreHeader className="px-6 py-4 bg-muted/60 dark:bg-white/[0.08]">
                             <div className="flex items-center justify-between">
-                                <CardTitle className="text-lg font-bold">
+                                <CardTitle className="text-lg font-bold text-foreground dark:text-white/95">
                                     {innings.teamName} Innings
                                 </CardTitle>
-                                <Badge variant="default" className="p-3 text-base font-bold">
+                                <Badge variant="default" className="px-4 py-2 text-base font-bold">
                                     {innings.score}/{innings.wickets} ({innings.overs} ov)
                                 </Badge>
                             </div>
                         </ScoreHeader>
-                        <Separator className="h-px bg-border/50" />
+                        <Separator className="h-px bg-border/60 dark:bg-border/40" />
 
                         <CardContent className="p-0">
                             {/* Batting Section */}
-                            <div className="px-6 space-y-2">
+                            <div className="px-6 py-4 space-y-3">
                                 <BattingTable batsmen={innings.batting} />
 
-                                <Separator className="h-px bg-border/50" />
+                                <Separator className="h-px bg-border/50 dark:bg-border/30" />
+
+                                {/* Current Partnership */}
+                                {innings.currentPartnership && (
+                                    <>
+                                        <PartnershipInfo partnership={innings.currentPartnership} />
+                                        <Separator className="h-px bg-border/50 dark:bg-border/30" />
+                                    </>
+                                )}
+
                                 {/* Extras */}
-                                <div className="text-sm text-muted-foreground my-2.5">
-                                    <span className="font-semibold text-foreground">Extras:</span>{' '}
+                                <div className="text-sm text-muted-foreground dark:text-white/70 my-2.5">
+                                    <span className="font-semibold text-foreground dark:text-white/90">Extras:</span>{' '}
                                     {innings.extras.total} (b {innings.extras.byes}, lb {innings.extras.legByes}, w {innings.extras.wides}, nb {innings.extras.noBalls})
                                 </div>
 
-                                <Separator className="h-px bg-border/50" />
+                                <Separator className="h-px bg-border/50 dark:bg-border/30" />
+
                                 {/* Total */}
-                                <div className="text-sm text-muted-foreground my-2.5">
-                                    <span className="font-semibold text-foreground">Total:</span>{' '}
-                                    {innings.score}
+                                <div className="text-sm text-muted-foreground dark:text-white/70 my-2.5">
+                                    <span className="font-semibold text-foreground dark:text-white/90">Total:</span>{' '}
+                                    {innings.score}/{innings.wickets} ({innings.overs} ov)
                                 </div>
 
-                                <Separator className="h-px bg-border/50" />
-                                {/* Did Not Bat */}
-                                <div className="text-sm text-muted-foreground my-2.5">
-                                    <span className="font-semibold text-foreground">Did Not Bat:</span>{' '}
-                                    {innings.didNotBat?.join(', ') ?? 'None'}
-                                </div>
+                                {innings.yetToBat && innings.yetToBat.length > 0 && (
+                                    <>
+                                        <Separator className="h-px bg-border/50 dark:bg-border/30" />
+                                        {/* Yet to Bat */}
+                                        <div className="text-sm text-muted-foreground dark:text-white/70 my-2.5">
+                                            <span className="font-semibold text-foreground dark:text-white/90">Yet to Bat:</span>{' '}
+                                            {innings.yetToBat.join(', ')}
+                                        </div>
+                                    </>
+                                )}
+
+                                {innings.didNotBat && innings.didNotBat.length > 0 && (
+                                    <>
+                                        <Separator className="h-px bg-border/50 dark:bg-border/30" />
+                                        {/* Did Not Bat */}
+                                        <div className="text-sm text-muted-foreground dark:text-white/70 my-2.5">
+                                            <span className="font-semibold text-foreground dark:text-white/90">Did Not Bat:</span>{' '}
+                                            {innings.didNotBat.join(', ')}
+                                        </div>
+                                    </>
+                                )}
                             </div>
 
+                            <Separator className="h-px bg-border/60 dark:bg-border/40" />
+
                             {/* Bowling Section */}
-                            <div className="p-6 space-y-4">
+                            <div className="px-6 py-4 space-y-3">
                                 <BowlingTable bowlers={innings.bowling} />
 
-                                <Separator className="h-px bg-border/50" />
+                                <Separator className="h-px bg-border/50 dark:bg-border/30" />
+
                                 {/* Fall of Wickets */}
                                 <FallOfWickets wickets={innings.fallOfWickets} />
                             </div>
@@ -368,10 +411,10 @@ export default function ScoreboardPage() {
 
                 {/* Player of the Match */}
                 {dummyScoreboardData.playerOfTheMatch && (
-                    <Card className="border border-border/50 shadow-sm bg-card">
+                    <Card className="border border-border/50 dark:border-border/30 shadow-sm bg-card">
                         <CardContent className="p-6">
                             <p className="text-sm">
-                                <span className="font-bold text-foreground">Player of the Match:</span>{' '}
+                                <span className="font-bold text-foreground dark:text-white/90">Player of the Match:</span>{' '}
                                 <span className="text-primary font-semibold">{dummyScoreboardData.playerOfTheMatch}</span>
                             </p>
                         </CardContent>

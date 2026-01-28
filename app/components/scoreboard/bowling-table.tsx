@@ -16,38 +16,43 @@ export function BowlingTable({ bowlers }: BowlingTableProps) {
     return (
         <div className="overflow-x-auto">
             <Table>
-                <TableHeader className="bg-muted dark:bg-white/5">
-                    <TableRow className="hover:bg-transparent border-border/40 dark:border-white/[0.05]">
-                        <TableHead className="px-6 py-4 font-bold text-sm text-foreground">Bowler</TableHead>
-                        <TableHead className="font-bold text-sm text-foreground text-right">O</TableHead>
-                        <TableHead className="font-bold text-sm text-foreground text-right">M</TableHead>
-                        <TableHead className="font-bold text-sm text-foreground text-right">R</TableHead>
-                        <TableHead className="font-bold text-sm text-foreground text-right">W</TableHead>
-                        <TableHead className="font-bold text-sm text-foreground text-right">Econ</TableHead>
+                <TableHeader className="bg-muted/50 dark:bg-white/[0.05]">
+                    <TableRow className="hover:bg-transparent border-border/40 dark:border-white/[0.08]">
+                        <TableHead className="px-6 py-4 font-bold text-sm text-foreground dark:text-white/90">Bowler</TableHead>
+                        <TableHead className="font-bold text-sm text-foreground dark:text-white/90 text-right">O</TableHead>
+                        <TableHead className="font-bold text-sm text-foreground dark:text-white/90 text-right">M</TableHead>
+                        <TableHead className="font-bold text-sm text-foreground dark:text-white/90 text-right">R</TableHead>
+                        <TableHead className="font-bold text-sm text-foreground dark:text-white/90 text-right">W</TableHead>
+                        <TableHead className="font-bold text-sm text-foreground dark:text-white/90 text-right">Econ</TableHead>
                     </TableRow>
                 </TableHeader>
                 <TableBody>
                     {bowlers.map((bowler, index) => (
                         <TableRow
                             key={index}
-                            className="transition-all duration-300 border-border/20 dark:border-white/[0.03] hover:bg-muted/30 dark:hover:bg-white/[0.02]"
+                            className={`
+                                border-border/40 dark:border-white/[0.08]
+                                hover:bg-muted/30 dark:hover:bg-white/[0.05]
+                                transition-colors
+                                ${index % 2 === 0 ? 'bg-transparent' : 'bg-muted/20 dark:bg-white/[0.02]'}
+                            `}
                         >
-                            <TableCell className="px-6 py-4 font-medium">
+                            <TableCell className="px-6 py-4 font-medium text-foreground dark:text-white/90">
                                 {bowler.name}
                             </TableCell>
-                            <TableCell className="font-mono text-sm font-medium text-right tabular-nums">
+                            <TableCell className="text-right tabular-nums text-muted-foreground dark:text-white/70">
                                 {bowler.overs}
                             </TableCell>
-                            <TableCell className="font-mono text-sm font-medium text-right tabular-nums">
+                            <TableCell className="text-right tabular-nums text-muted-foreground dark:text-white/70">
                                 {bowler.maidens}
                             </TableCell>
-                            <TableCell className="font-mono text-sm font-medium text-right tabular-nums">
+                            <TableCell className="text-right tabular-nums text-muted-foreground dark:text-white/70">
                                 {bowler.runs}
                             </TableCell>
-                            <TableCell className="font-mono text-sm font-medium text-right tabular-nums">
+                            <TableCell className="text-right font-semibold tabular-nums text-foreground dark:text-white/90">
                                 {bowler.wickets}
                             </TableCell>
-                            <TableCell className="font-mono text-sm font-medium text-right tabular-nums">
+                            <TableCell className="text-right tabular-nums text-muted-foreground dark:text-white/70">
                                 {bowler.economy.toFixed(2)}
                             </TableCell>
                         </TableRow>

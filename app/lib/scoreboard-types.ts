@@ -25,6 +25,13 @@ export interface FallOfWicket {
     overs: number
 }
 
+export interface Partnership {
+    batsman1: string
+    batsman2: string
+    runs: number
+    balls: number
+}
+
 export interface InningsData {
     teamName: string
     score: number
@@ -41,6 +48,8 @@ export interface InningsData {
     bowling: BowlerStats[]
     fallOfWickets: FallOfWicket[]
     didNotBat?: string[]
+    yetToBat?: string[]
+    currentPartnership?: Partnership
 }
 
 export interface ScoreboardData {
