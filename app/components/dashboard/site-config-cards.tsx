@@ -1,47 +1,55 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
-import { Globe } from "lucide-react"
+import { Activity, PlayCircle, Globe, Award, Settings } from "lucide-react"
 
 interface SiteConfigCardsProps {
     sites: string[]
 }
 
+const siteIcons: Record<string, { icon: any, color: string }> = {
+    'Crickbuzz': { icon: Activity, color: 'bg-blue-100 text-blue-500' },
+    'Espn': { icon: PlayCircle, color: 'bg-orange-100 text-orange-500' },
+    'NW18': { icon: Globe, color: 'bg-red-100 text-red-500' },
+    'Sportskeeda': { icon: Award, color: 'bg-green-100 text-green-500' },
+    'CricketLineGuru': { icon: Settings, color: 'bg-purple-100 text-purple-500' },
+}
+
 export function SiteConfigCards({ sites }: SiteConfigCardsProps) {
     return (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {sites.map((site) => {
-                return (
-                    <Card key={site} className="relative overflow-hidden shadow-md border border-border/50 dark:border-white/[0.08] group transition-all duration-300 hover:shadow-lg hover:shadow-primary/5 hover:-translate-y-0.5 bg-card dark:bg-card">
-                        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                        <CardHeader className="pb-3 flex flex-row items-center gap-3 space-y-0 relative z-10">
-                            <div className="bg-primary/10 dark:bg-primary/20 p-2.5 rounded-xl text-primary transform transition-transform group-hover:scale-110 group-hover:rotate-3 shadow-inner group-hover:shadow-primary/20">
-                                <Globe className="h-5 w-5" />
-                            </div>
-                            <CardTitle className="text-base font-black tracking-tight uppercase opacity-90">{site}</CardTitle>
-                        </CardHeader>
-                        <CardContent className="space-y-4 relative z-10">
-                            <div className="space-y-2">
-                                <Input
-                                    id={`${site}-key`}
-                                    placeholder="Enter key..."
-                                    className="h-10 bg-background/50 dark:bg-white/[0.06] border-border dark:border-white/[0.15] focus:ring-2 focus:ring-primary/50 dark:focus:ring-primary/60 transition-all placeholder:text-muted-foreground/50 dark:placeholder:text-white/30 text-foreground dark:text-white"
-                                />
-                            </div>
-                            <div className="flex gap-2 pt-2">
-                                <Button
-                                    size="sm"
-                                    className="w-full bg-primary text-primary-foreground font-black tracking-widest text-[10px] transition-all duration-300 transform active:scale-[0.98]"
-                                >
-                                    SUBMIT
-                                </Button>
-                            </div>
-                        </CardContent>
-                    </Card>
-                )
-            })}
+        <div className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                {sites.map((site) => {
+                    const { icon: Icon, color } = siteIcons[site] || { icon: Globe, color: 'bg-gray-100 text-gray-500' }
+                    return (
+                        <Card key={site} className="shadow-sm border border-border/40 bg-white dark:bg-card">
+                            <CardContent className="p-4 flex items-center gap-4">
+                                <div className={`p-3 rounded-xl ${color}`}>
+                                    <Icon className="h-6 w-6" />
+                                </div>
+                                <div className="flex-1 space-y-1">
+                                    <p className="text-sm font-bold text-foreground/80">{site}</p>
+                                    <Input
+                                        id={`${site}-key`}
+                                        placeholder="Key"
+                                        className="h-8 text-xs border-border/60 bg-transparent"
+                                    />
+                                </div>
+                            </CardContent>
+                        </Card>
+                    )
+                })}
+            </div>
+            <div className="flex justify-between items-center px-2">
+                <Button variant="destructive" className="bg-[#E74C3C] hover:bg-[#C0392B] px-8 py-6 text-lg font-medium rounded-md">
+                    CANCEL
+                </Button>
+                <Button className="bg-[#2C3E50] hover:bg-[#1A252F] px-8 py-6 text-lg font-medium rounded-md">
+                    SUBMIT
+                </Button>
+            </div>
         </div>
     )
 }

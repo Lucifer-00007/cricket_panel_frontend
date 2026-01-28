@@ -26,62 +26,56 @@ export function MatchTable({ data }: MatchTableProps) {
       <Table>
         <TableHeader>
           <TableRow className="hover:bg-transparent border-border/40 dark:border-white/[0.05]">
-            <TableHead className="px-6 py-4 font-black uppercase tracking-[0.2em] text-[10px] text-muted-foreground/80 dark:text-muted-foreground/60">Date</TableHead>
-            <TableHead className="font-black uppercase tracking-[0.2em] text-[10px] text-muted-foreground/80 dark:text-muted-foreground/60">Match Key</TableHead>
-            <TableHead className="font-black uppercase tracking-[0.2em] text-[10px] text-muted-foreground/80 dark:text-muted-foreground/60">Match</TableHead>
-            <TableHead className="font-black uppercase tracking-[0.2em] text-[10px] text-muted-foreground/80 dark:text-muted-foreground/60">Inns 1</TableHead>
-            <TableHead className="font-black uppercase tracking-[0.2em] text-[10px] text-muted-foreground/80 dark:text-muted-foreground/60">Inns 2</TableHead>
+            <TableHead className="px-6 py-4 font-bold text-sm text-foreground">Date</TableHead>
+            <TableHead className="font-bold text-sm text-foreground">Match Key</TableHead>
+            <TableHead className="font-bold text-sm text-foreground">Match</TableHead>
+            <TableHead className="font-bold text-sm text-foreground">Inns 1</TableHead>
+            <TableHead className="font-bold text-sm text-foreground">Inns 2</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {matches.map(([matchId, match]) => {
             const isLive = match.match_status === 'Live'
-            const isCompleted = match.match_status === 'Post'
+            const isCompleted = match.match_status === 'Post' || match.match_status === 'Completed'
+            const isUpcoming = match.match_status === 'Pre' || match.match_status === 'Preview'
 
             return (
               <TableRow
                 key={matchId}
                 className={cn(
                   'transition-all duration-300 border-border/20 dark:border-white/[0.03] px-6 group/row',
-                  isLive && 'bg-destructive/[0.03] hover:bg-destructive/[0.08] dark:bg-destructive/[0.05] dark:hover:bg-destructive/[0.1] shadow-inner',
-                  !isLive && 'hover:bg-muted/30 dark:hover:bg-white/[0.02]',
-                  isCompleted && 'text-muted-foreground/50 opacity-70 grayscale-[0.5] select-none'
+                  isLive && 'text-destructive dark:text-red-400',
+                  isUpcoming && 'text-blue-600 dark:text-blue-400',
+                  isCompleted && 'text-foreground/80 dark:text-foreground/60',
+                  'hover:bg-muted/30 dark:hover:bg-white/[0.02]'
                 )}
               >
-                <TableCell className="whitespace-nowrap px-6 py-5 text-xs font-bold tracking-tight text-foreground/80">
+                <TableCell className="whitespace-nowrap px-6 py-4 text-xs font-medium">
                   {formatDateTime(match.start_date_time)}
                 </TableCell>
-                <TableCell className="font-mono text-[10px] font-black text-muted-foreground/50 group-hover/row:text-muted-foreground/80 transition-colors">#{matchId}</TableCell>
+                <TableCell className="font-mono text-xs font-medium">{matchId}</TableCell>
                 <TableCell>
                   <a
                     href={match.match_url || '#'}
                     target="_blank"
                     rel="noopener noreferrer"
                     className={cn(
-                      'flex items-center gap-3 group/link transition-all',
-                      isLive && 'text-destructive font-black',
-                      !isLive && !isCompleted && 'text-foreground/90 font-black hover:text-primary',
-                      isCompleted && 'text-muted-foreground'
+                      'flex items-center gap-2 transition-all hover:underline font-semibold',
+                      isLive && 'text-destructive dark:text-red-400',
+                      isUpcoming && 'text-blue-600 dark:text-blue-400',
+                      isCompleted && 'text-foreground/90 dark:text-foreground/80'
                     )}
                   >
-                    {isLive && (
-                      <span className="relative flex h-2.5 w-2.5">
-                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-600 shadow-[0_0_8px_rgba(220,38,38,0.5)]"></span>
-                      </span>
-                    )}
-                    <span className="group-hover/link:translate-x-1 transition-transform duration-500 truncate max-w-[200px] lg:max-w-none">
+                    <span className="truncate max-w-[200px] lg:max-w-none">
                       {match.t1?.n || '---'} v {match.t2?.n || '---'}
                     </span>
                   </a>
                 </TableCell>
-                <TableCell className="font-mono text-xs font-black text-foreground/70 group-hover/row:text-foreground transition-colors">
-                  <span className="tabular-nums">{match.i1?.sc || '---'}</span>/<span className="tabular-nums">{match.i1?.wk || '---'}</span> 
-                  <span className="ml-1.5 text-[10px] text-muted-foreground/60 font-medium tabular-nums">({match.i1?.ov || '---'})</span>
+                <TableCell className="font-mono text-xs font-medium">
+                  <span className="tabular-nums">{match.i1?.sc || '0'}</span>/<span className="tabular-nums">{match.i1?.wk || '0'}</span>({match.i1?.ov || '0'})
                 </TableCell>
-                <TableCell className="font-mono text-xs font-black text-foreground/70 group-hover/row:text-foreground transition-colors">
-                  <span className="tabular-nums">{match.i2?.sc || '---'}</span>/<span className="tabular-nums">{match.i2?.wk || '---'}</span> 
-                  <span className="ml-1.5 text-[10px] text-muted-foreground/60 font-medium tabular-nums">({match.i2?.ov || '---'})</span>
+                <TableCell className="font-mono text-xs font-medium">
+                  <span className="tabular-nums">{match.i2?.sc || '0'}</span>/<span className="tabular-nums">{match.i2?.wk || '0'}</span>({match.i2?.ov || '0'})
                 </TableCell>
               </TableRow>
             )

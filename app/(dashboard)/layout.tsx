@@ -5,7 +5,7 @@ export default function DashboardLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const sites = ['Crickbuzz', 'Espn', 'NW18', 'Sportskeeda']
+  const sites = ['Crickbuzz', 'Espn', 'NW18', 'Sportskeeda', 'CricketLineGuru']
 
   return (
     <div className="flex min-h-screen flex-col md:flex-row bg-background">
