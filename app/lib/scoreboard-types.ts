@@ -40,15 +40,17 @@ export interface InningsData {
     batting: BatsmanStats[]
     bowling: BowlerStats[]
     fallOfWickets: FallOfWicket[]
+    didNotBat?: string[]
 }
 
 export interface ScoreboardData {
     matchTitle: string
     venue: string
     date: string
-    matchType: string
+    series: string
     tossInfo?: string
     innings: InningsData[]
+    didNotBat?: string[]
     result?: string
     playerOfTheMatch?: string
 }

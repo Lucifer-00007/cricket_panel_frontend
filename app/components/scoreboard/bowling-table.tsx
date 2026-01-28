@@ -16,7 +16,7 @@ export function BowlingTable({ bowlers }: BowlingTableProps) {
     return (
         <div className="overflow-x-auto">
             <Table>
-                <TableHeader>
+                <TableHeader className="bg-muted dark:bg-white/5">
                     <TableRow className="hover:bg-transparent border-border/40 dark:border-white/[0.05]">
                         <TableHead className="px-6 py-4 font-bold text-sm text-foreground">Bowler</TableHead>
                         <TableHead className="font-bold text-sm text-foreground text-right">O</TableHead>

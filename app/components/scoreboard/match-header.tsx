@@ -4,16 +4,16 @@ interface MatchHeaderProps {
     matchTitle: string
     venue: string
     date: string
-    matchType: string
+    series: string
     tossInfo?: string
     result?: string
 }
 
 export function MatchHeader({
     matchTitle,
+    series,
     venue,
     date,
-    matchType,
     tossInfo,
     result
 }: MatchHeaderProps) {
@@ -28,21 +28,22 @@ export function MatchHeader({
                             <span>{venue}</span>
                         </div>
                         <div className="flex items-center gap-2">
-                            <span className="font-semibold text-foreground">Date:</span>
-                            <span>{date}</span>
+                            <span className="font-semibold text-foreground">Series:</span>
+                            <span>{series}</span>
                         </div>
                         <div className="flex items-center gap-2">
-                            <span className="font-semibold text-foreground">Match:</span>
-                            <span>{matchType}</span>
+                            <span className="font-semibold text-foreground">Date & Time:</span>
+                            <span>{date}</span>
                         </div>
+                        {tossInfo && (
+                            <p className="text-sm text-muted-foreground">
+                                <span className="font-semibold text-foreground">Toss:</span> {tossInfo}
+                            </p>
+                        )}
                     </div>
-                    {tossInfo && (
-                        <p className="text-sm text-muted-foreground">
-                            <span className="font-semibold text-foreground">Toss:</span> {tossInfo}
-                        </p>
-                    )}
+
                     {result && (
-                        <p className="text-sm font-semibold text-primary">
+                        <p className="font-semibold text-primary">
                             {result}
                         </p>
                     )}

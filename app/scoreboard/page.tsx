@@ -1,4 +1,4 @@
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardTitle, ScoreHeader } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { Badge } from '@/components/ui/badge'
 import { ModeToggle } from '@/components/mode-toggle'
@@ -12,8 +12,8 @@ import { type ScoreboardData } from '@/lib/scoreboard-types'
 const dummyScoreboardData: ScoreboardData = {
     matchTitle: 'South Africa vs West Indies, 1st T20I',
     venue: 'SuperSport Park, Centurion',
+    series: '2024 T20 World Cup',
     date: 'March 16, 2024',
-    matchType: 'T20 International',
     tossInfo: 'West Indies won the toss and elected to bowl first',
     result: 'South Africa won by 28 runs',
     playerOfTheMatch: 'Quinton de Kock',
@@ -306,7 +306,7 @@ export default function ScoreboardPage() {
                     matchTitle={dummyScoreboardData.matchTitle}
                     venue={dummyScoreboardData.venue}
                     date={dummyScoreboardData.date}
-                    matchType={dummyScoreboardData.matchType}
+                    series={dummyScoreboardData.series}
                     tossInfo={dummyScoreboardData.tossInfo}
                     result={dummyScoreboardData.result}
                 />
@@ -314,41 +314,54 @@ export default function ScoreboardPage() {
                 {/* Innings Cards */}
                 {dummyScoreboardData.innings.map((innings, index) => (
                     <Card key={index} className="border border-border/50 shadow-sm overflow-hidden bg-card">
-                        <CardHeader className="px-6 py-4 bg-muted/30">
+                        <ScoreHeader className="px-6 py-4 bg-muted dark:bg-white/10">
                             <div className="flex items-center justify-between">
                                 <CardTitle className="text-lg font-bold">
                                     {innings.teamName} Innings
                                 </CardTitle>
-                                <Badge variant="secondary" className="text-base font-bold">
+                                <Badge variant="default" className="p-3 text-base font-bold">
                                     {innings.score}/{innings.wickets} ({innings.overs} ov)
                                 </Badge>
                             </div>
-                        </CardHeader>
+                        </ScoreHeader>
                         <Separator className="h-px bg-border/50" />
 
                         <CardContent className="p-0">
                             {/* Batting Section */}
-                            <div className="p-6 space-y-4">
-                                <h3 className="text-base font-bold text-foreground">Batting</h3>
+                            <div className="px-6 space-y-2">
                                 <BattingTable batsmen={innings.batting} />
 
+                                <Separator className="h-px bg-border/50" />
                                 {/* Extras */}
-                                <div className="text-sm text-muted-foreground">
+                                <div className="text-sm text-muted-foreground my-2.5">
                                     <span className="font-semibold text-foreground">Extras:</span>{' '}
                                     {innings.extras.total} (b {innings.extras.byes}, lb {innings.extras.legByes}, w {innings.extras.wides}, nb {innings.extras.noBalls})
                                 </div>
 
+                                <Separator className="h-px bg-border/50" />
+                                {/* Total */}
+                                <div className="text-sm text-muted-foreground my-2.5">
+                                    <span className="font-semibold text-foreground">Total:</span>{' '}
+                                    {innings.score}
+                                </div>
+
+                                <Separator className="h-px bg-border/50" />
+                                {/* Did Not Bat */}
+                                <div className="text-sm text-muted-foreground my-2.5">
+                                    <span className="font-semibold text-foreground">Did Not Bat:</span>{' '}
+                                    {innings.didNotBat?.join(', ') ?? 'None'}
+                                </div>
+                            </div>
+
+                            {/* Bowling Section */}
+                            <div className="p-6 space-y-4">
+                                <BowlingTable bowlers={innings.bowling} />
+
+                                <Separator className="h-px bg-border/50" />
                                 {/* Fall of Wickets */}
                                 <FallOfWickets wickets={innings.fallOfWickets} />
                             </div>
 
-                            <Separator className="h-px bg-border/50" />
-
-                            {/* Bowling Section */}
-                            <div className="p-6 space-y-4">
-                                <h3 className="text-base font-bold text-foreground">Bowling</h3>
-                                <BowlingTable bowlers={innings.bowling} />
-                            </div>
                         </CardContent>
                     </Card>
                 ))}
