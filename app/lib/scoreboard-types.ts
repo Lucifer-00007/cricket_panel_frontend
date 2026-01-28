@@ -79,6 +79,7 @@ export interface ScoreboardData {
     matchTitle: string
     venue: string
     date: string
+    time?: string
     series: string
     tossInfo?: string
     innings: InningsData[]
@@ -86,4 +87,6 @@ export interface ScoreboardData {
     result?: string
     playerOfTheMatch?: string
     matchInfo?: MatchInfo
+    team1Squad?: string[]
+    team2Squad?: string[]
 }
