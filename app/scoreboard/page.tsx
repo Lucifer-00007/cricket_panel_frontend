@@ -7,6 +7,9 @@ import { BattingTable } from '@/components/scoreboard/batting-table'
 import { BowlingTable } from '@/components/scoreboard/bowling-table'
 import { FallOfWickets } from '@/components/scoreboard/fall-of-wickets'
 import { PartnershipInfo } from '@/components/scoreboard/partnership-info'
+import { Partnerships } from '@/components/scoreboard/partnerships'
+import { Powerplays } from '@/components/scoreboard/powerplays'
+import { MatchInfoSection } from '@/components/scoreboard/match-info-section'
 import { type ScoreboardData } from '@/lib/scoreboard-types'
 
 // Dummy data matching the reference image style
@@ -18,6 +21,12 @@ const dummyScoreboardData: ScoreboardData = {
     tossInfo: 'West Indies won the toss and elected to bowl first',
     result: 'South Africa won by 28 runs',
     playerOfTheMatch: 'Quinton de Kock',
+    matchInfo: {
+        umpires: ['Adrian Holdstock', 'Marais Erasmus'],
+        thirdUmpire: 'Allahudien Paleker',
+        referee: 'Andy Pycroft',
+        reserve: 'Lubabalo Gcuma'
+    },
     innings: [
         {
             teamName: 'South Africa',
@@ -143,7 +152,19 @@ const dummyScoreboardData: ScoreboardData = {
                 batsman2: 'Heinrich Klaasen',
                 runs: 30,
                 balls: 16
-            }
+            },
+            partnerships: [
+                { wicket: 1, batsman1: 'Quinton de Kock', batsman2: 'Reeza Hendricks', runs: 25, balls: 25 },
+                { wicket: 2, batsman1: 'Quinton de Kock', batsman2: 'Rassie van der Dussen', runs: 87, balls: 54 },
+                { wicket: 3, batsman1: 'Aiden Markram', batsman2: 'Rassie van der Dussen', runs: 26, balls: 18 },
+                { wicket: 4, batsman1: 'Aiden Markram', batsman2: 'David Miller', runs: 17, balls: 14 },
+                { wicket: 0, batsman1: 'Aiden Markram', batsman2: 'Heinrich Klaasen', runs: 30, balls: 16 }
+            ],
+            powerplays: [
+                { overs: '0.1-6.0', runs: 52, wickets: 1 },
+                { overs: '6.1-10.0', runs: 48, wickets: 0 },
+                { overs: '16.1-20.0', runs: 53, wickets: 3 }
+            ]
         },
         {
             teamName: 'West Indies',
@@ -299,7 +320,22 @@ const dummyScoreboardData: ScoreboardData = {
                 batsman2: 'Alzarri Joseph',
                 runs: 2,
                 balls: 4
-            }
+            },
+            partnerships: [
+                { wicket: 1, batsman1: 'Brandon King', batsman2: 'Kyle Mayers', runs: 12, balls: 14 },
+                { wicket: 2, batsman1: 'Kyle Mayers', batsman2: 'Nicholas Pooran', runs: 36, balls: 28 },
+                { wicket: 3, batsman1: 'Nicholas Pooran', batsman2: 'Rovman Powell', runs: 50, balls: 32 },
+                { wicket: 4, batsman1: 'Rovman Powell', batsman2: 'Andre Russell', runs: 27, balls: 17 },
+                { wicket: 5, batsman1: 'Rovman Powell', batsman2: 'Jason Holder', runs: 17, balls: 12 },
+                { wicket: 6, batsman1: 'Jason Holder', batsman2: 'Akeal Hosein', runs: 13, balls: 10 },
+                { wicket: 7, batsman1: 'Romario Shepherd', batsman2: 'Akeal Hosein', runs: 2, balls: 4 },
+                { wicket: 0, batsman1: 'Romario Shepherd', batsman2: 'Alzarri Joseph', runs: 2, balls: 4 }
+            ],
+            powerplays: [
+                { overs: '0.1-6.0', runs: 45, wickets: 2 },
+                { overs: '6.1-10.0', runs: 42, wickets: 1 },
+                { overs: '16.1-20.0', runs: 35, wickets: 4 }
+            ]
         },
     ],
 }
@@ -391,6 +427,22 @@ export default function ScoreboardPage() {
                                         </div>
                                     </>
                                 )}
+
+                                {/* Partnerships */}
+                                {innings.partnerships && innings.partnerships.length > 0 && (
+                                    <>
+                                        <Separator className="h-px bg-border/50 dark:bg-border/30" />
+                                        <Partnerships partnerships={innings.partnerships} />
+                                    </>
+                                )}
+
+                                {/* Powerplays */}
+                                {innings.powerplays && innings.powerplays.length > 0 && (
+                                    <>
+                                        <Separator className="h-px bg-border/50 dark:bg-border/30" />
+                                        <Powerplays powerplays={innings.powerplays} />
+                                    </>
+                                )}
                             </div>
 
                             <Separator className="h-px bg-border/60 dark:bg-border/40" />
@@ -419,6 +471,11 @@ export default function ScoreboardPage() {
                             </p>
                         </CardContent>
                     </Card>
+                )}
+
+                {/* Match Information */}
+                {dummyScoreboardData.matchInfo && (
+                    <MatchInfoSection matchInfo={dummyScoreboardData.matchInfo} />
                 )}
             </div>
         </div>

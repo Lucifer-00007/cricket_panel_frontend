@@ -32,6 +32,27 @@ export interface Partnership {
     balls: number
 }
 
+export interface PartnershipHistory {
+    wicket: number
+    batsman1: string
+    batsman2: string
+    runs: number
+    balls: number
+}
+
+export interface PowerplayInfo {
+    overs: string
+    runs: number
+    wickets: number
+}
+
+export interface MatchInfo {
+    umpires?: string[]
+    thirdUmpire?: string
+    referee?: string
+    reserve?: string
+}
+
 export interface InningsData {
     teamName: string
     score: number
@@ -50,6 +71,8 @@ export interface InningsData {
     didNotBat?: string[]
     yetToBat?: string[]
     currentPartnership?: Partnership
+    partnerships?: PartnershipHistory[]
+    powerplays?: PowerplayInfo[]
 }
 
 export interface ScoreboardData {
@@ -62,4 +85,5 @@ export interface ScoreboardData {
     didNotBat?: string[]
     result?: string
     playerOfTheMatch?: string
+    matchInfo?: MatchInfo
 }
