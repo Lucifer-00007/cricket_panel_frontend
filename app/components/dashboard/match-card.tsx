@@ -29,7 +29,7 @@ export function MatchCard({ siteName, apiUrl, data }: MatchCardProps) {
         </div>
         <Separator className="h-px bg-border/50" />
         <CardContent className="p-0">
-          <MatchTable data={data} />
+          <MatchTable data={data} siteName={siteName} />
         </CardContent>
       </Card>
     </div>

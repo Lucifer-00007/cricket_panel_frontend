@@ -6,20 +6,25 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table'
-import { type SiteData } from '@/lib/types'
+import { type SiteData, type SiteName } from '@/lib/types'
 import { formatDateTime } from '@/lib/utils'
 import { cn } from '@/lib/utils'
+import Link from 'next/link'
+import { SITE_SOURCE_MAP } from '@/lib/constants'
 
 interface MatchTableProps {
   data: SiteData
+  siteName: string
 }
 
-export function MatchTable({ data }: MatchTableProps) {
+export function MatchTable({ data, siteName }: MatchTableProps) {
   const matches = Object.entries(data).filter(([, match]) => match.t1)
 
   if (matches.length === 0) {
     return <p className="text-muted-foreground text-center py-8">No matches available</p>
   }
+
+  const source = SITE_SOURCE_MAP[siteName as SiteName]
 
   return (
     <div className="overflow-x-auto">
@@ -53,7 +58,18 @@ export function MatchTable({ data }: MatchTableProps) {
                 <TableCell className="whitespace-nowrap px-6 py-4 text-xs font-medium">
                   {formatDateTime(match.start_date_time)}
                 </TableCell>
-                <TableCell className="font-mono text-xs font-medium">{matchId}</TableCell>
+                <TableCell className="font-mono text-xs font-medium">
+                  {source ? (
+                    <Link 
+                      href={`/scoreboard/${source}/${matchId}`}
+                      className="text-blue-600 dark:text-blue-400 hover:underline hover:text-blue-800 dark:hover:text-blue-300 transition-colors"
+                    >
+                      {matchId}
+                    </Link>
+                  ) : (
+                    matchId
+                  )}
+                </TableCell>
                 <TableCell>
                   <a
                     href={match.match_url || '#'}

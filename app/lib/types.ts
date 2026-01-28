@@ -52,3 +52,65 @@ export interface SiteResponse {
 }
 
 export type SiteName = 'Crickbuzz' | 'Espn' | 'NW18' | 'Sportskeeda' | 'CricketLineGuru'
+
+// Scorecard API Types
+
+export interface BatsmanRaw {
+  name: string
+  runs: string
+  balls: string
+  fours: string
+  sixes: string
+  strikeRate: string
+  outHow: string
+}
+
+export interface BowlerRaw {
+  bowler: string
+  overs: string
+  maidens: string
+  runs: string
+  wickets: string
+  economy: string
+}
+
+export interface InningsRaw {
+  inningsData: {
+    teamName: string
+    totalScore: string
+    batsmen: BatsmanRaw[]
+  }
+  bowlingData: BowlerRaw[]
+  fallOfWickets: string[]
+  extrasEle: string
+}
+
+export interface MatchInfoRaw {
+  Match: string
+  Series: string
+  Date: string
+  Venue: string
+  Toss: string
+  Umpires: string
+  "Third Umpire"?: string
+  "Match Referee"?: string
+}
+
+export interface TeamSquadRaw {
+  teamName: string
+  playingList: string[]
+}
+
+export interface MatchDetailsRaw {
+  matchInfo: MatchInfoRaw
+  team1: TeamSquadRaw
+  team2: TeamSquadRaw
+}
+
+export interface ScorecardResponse {
+  innings1?: InningsRaw
+  innings2?: InningsRaw
+  innings3?: InningsRaw
+  innings4?: InningsRaw
+  matchDetails: MatchDetailsRaw
+}

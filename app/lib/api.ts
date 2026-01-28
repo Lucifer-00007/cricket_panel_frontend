@@ -1,4 +1,4 @@
-import { type SiteData, type SiteResponse, type SiteName } from './types'
+import { type SiteData, type SiteResponse, type SiteName, type ScorecardResponse } from './types'
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL || ''
 
@@ -42,4 +42,22 @@ export async function fetchMatchData(
 export async function fetchAllMatches(): Promise<SiteResponse[]> {
   const sites: SiteName[] = ['Crickbuzz', 'Espn', 'NW18', 'Sportskeeda', 'CricketLineGuru']
   return Promise.all(sites.map(fetchMatchData))
+}
+
+export async function fetchMatchDetails(source: string, matchId: string): Promise<ScorecardResponse> {
+  const apiUrl = `${API_BASE_URL}/${source}/${matchId}`
+  
+  const response = await fetch(apiUrl, {
+    next: { revalidate: 30 },
+    headers: { 'Accept': 'application/json' }
+  })
+
+  if (!response.ok) {
+    if (response.status === 404) {
+      throw new Error('Scorecard not available for this match')
+    }
+    throw new Error(`Failed to fetch match details: HTTP ${response.status}`)
+  }
+
+  return response.json()
 }
