@@ -1,6 +1,7 @@
 import { fetchAllMatches } from '@/lib/api'
 import { MatchCard } from '@/components/dashboard/match-card'
 import { SiteConfigCards } from '@/components/dashboard/site-config-cards'
+import { MatchLegend } from '@/components/dashboard/match-legend'
 import { ModeToggle } from '@/components/mode-toggle'
 
 export const revalidate = 60 // Match the API revalidate time
@@ -23,6 +24,11 @@ export default async function Page() {
       {/* Configuration Cards */}
       <section>
         <SiteConfigCards sites={sites} />
+      </section>
+
+      {/* Match Status Legend */}
+      <section>
+        <MatchLegend />
       </section>
 
       {/* Main Content Area */}
