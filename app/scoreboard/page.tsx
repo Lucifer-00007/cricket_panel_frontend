@@ -13,6 +13,7 @@ import { MatchInfoSection } from '@/components/scoreboard/match-info-section'
 import { MATCH_DATA } from '@/constants/match-data'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
+import { ArrowLeft } from 'lucide-react'
 
 export default function ScoreboardPage() {
     return (
@@ -21,7 +22,10 @@ export default function ScoreboardPage() {
                 {/* Header */}
                 <div className="flex items-center justify-between pb-4">
                     <Link href="/">
-                        <Button variant="outline">Back to Home</Button>
+                        <Button variant="outline">
+                            <ArrowLeft className="mr-2 h-4 w-4" />
+                            Back to Home
+                        </Button>
                     </Link>
                     <div className="flex items-center gap-4">
                         <ModeToggle />
