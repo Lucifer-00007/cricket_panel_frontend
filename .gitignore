@@ -43,8 +43,10 @@ next-env.d.ts
 
 # firebase
 .firebase/
+firebase-debug.log
 
 # old public folder
 public-old/
 public/reference*.png
 .gemini-clipboard/
+
