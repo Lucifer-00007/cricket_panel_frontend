@@ -124,6 +124,20 @@ export function MatchInfoSection({ matchInfo }: MatchInfoSectionProps) {
 
                 <Separator className="h-px bg-border/60 dark:bg-border/40" />
 
+                {/* Player of the Match */}
+                {/* {dummyScoreboardData.playerOfTheMatch && (
+                    <Card className="border border-border/50 dark:border-border/30 shadow-sm bg-card">
+                        <CardContent className="p-6">
+                            <p className="text-sm">
+                                <span className="font-bold text-foreground dark:text-white/90">Player of the Match:</span>{' '}
+                                <span className="text-primary font-semibold">{dummyScoreboardData.playerOfTheMatch}</span>
+                            </p>
+                        </CardContent>
+                    </Card>
+                )} */}
+
+                <Separator className="h-px bg-border/60 dark:bg-border/40" />
+
                 {/* Team 1 Squad */}
                 {/* {matchInfo.team1Squad && matchInfo.team1Squad.length > 0 && (
                     <div className="text-sm">
